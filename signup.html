@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSetu - Sign Up</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff7ed, #f5f7fb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .logo span {
+            color: #ff7200;
+        }
+
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #172033;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #667085;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #344054;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d0d5dd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #ff7200;
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 50px;
+        }
+
+        .show {
+            position: absolute;
+            right: 12px;
+            top: 11px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .terms {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            margin: 15px 0;
+            color: #667085;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .terms input {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .signup-btn {
+            width: 100%;
+            border: none;
+            background: #ff7200;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .signup-btn:hover {
+            opacity: .9;
+        }
+
+        .login {
+            text-align: center;
+            margin-top: 20px;
+            color: #667085;
+        }
+
+        .login a {
+            color: #ff7200;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #344054;
+            text-decoration: none;
+        }
+
+        .driver-fields {
+            display: none;
+            background: #fff7ed;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+
+        .driver-fields.show-fields {
+            display: block;
+        }
+
+        .driver-note {
+            font-size: 13px;
+            color: #667085;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .success {
+            display: none;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            background: #dcfae6;
+            color: #079455;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            margin: 0 auto 18px;
+        }
+
+        .continue-btn {
+            margin-top: 20px;
+            width: 100%;
+            border: none;
+            background: #079455;
+            color: white;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #172033;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        @media(max-width:500px) {
+            .card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        🛺 Auto<span>Setu</span>
+    </div>
+
+    <div class="card">
+
+        <!-- SIGNUP FORM -->
+
+        <div id="signupForm">
+
+            <h1>Create Account 👋</h1>
+
+            <p class="subtitle">
+                Join AutoSetu and start your journey.
+            </p>
+
+            <form onsubmit="createAccount(event)">
+
+                <div class="form-group">
+
+                    <label>Full Name</label>
+
+                    <input
+                        id="name"
+                        type="text"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Mobile Number</label>
+
+                    <input
+                        id="phone"
+                        type="tel"
+                        placeholder="Enter 10-digit mobile number"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Email Address</label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Enter email address"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Create Password</label>
+
+                    <div class="password-box">
+
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="Create password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show"
+                            onclick="togglePassword('password')">
+
+                            👁️
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Confirm Password</label>
+
+                    <div class="password-box">
+
+                        <input
+                            id="confirmPassword"
+                            type="password"
+                            placeholder="Confirm password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show"
+                            onclick="togglePassword('confirmPassword')">
+
+                            👁️
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Account Type</label>
+
+                    <select
+                        id="role"
+                        onchange="accountTypeChanged()">
+
+                        <option value="passenger">
+                            👤 Passenger
+                        </option>
+
+                        <option value="driver">
+                            🚕 Driver
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DRIVER DETAILS -->
+
+                <div
+                    id="driverFields"
+                    class="driver-fields">
+
+                    <h3>🚕 Driver Information</h3>
+
+                    <p class="driver-note">
+                        These are demo verification fields for the
+                        college prototype. Do not upload real
+                        sensitive documents here.
+                    </p>
+
+                    <label>Vehicle Type</label>
+
+                    <select id="vehicleType">
+
+                        <option value="">
+                            Select vehicle
+                        </option>
+
+                        <option>
+                            Auto Rickshaw
+                        </option>
+
+                        <option>
+                            Taxi
+                        </option>
+
+                        <option>
+                            Car
+                        </option>
+
+                        <option>
+                            Bike
+                        </option>
+
+                    </select>
+
+                    <br><br>
+
+                    <label>Vehicle Number</label>
+
+                    <input
+                        id="vehicleNumber"
+                        type="text"
+                        placeholder="e.g. PB07AB1234"
+                    >
+
+                    <br><br>
+
+                    <label>Driving License Status</label>
+
+                    <select id="licenseStatus">
+
+                        <option value="pending">
+                            Pending Verification
+                        </option>
+
+                        <option value="verified">
+                            Demo Verified
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="terms">
+
+                    <input
+                        id="terms"
+                        type="checkbox"
+                        required
+                    >
+
+                    <span>
+                        I agree to AutoSetu's Terms,
+                        Privacy Policy and Safety Policy.
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="signup-btn">
+
+                    🚀 Create Account
+
+                </button>
+
+            </form>
+
+
+            <div class="login">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div id="success" class="success">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>Account Created!</h1>
+
+            <p class="subtitle">
+                Welcome to AutoSetu.
+                Your demo account has been created successfully.
+            </p>
+
+            <button
+                class="continue-btn"
+                onclick="goToDashboard()">
+
+                Continue to Dashboard →
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <a href="index.html" class="home">
+        ← Back to AutoSetu Home
+    </a>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.style.display = "block";
+
+    setTimeout(function() {
+
+        toast.style.display = "none";
+
+    }, 3000);
+}
+
+
+function togglePassword(id) {
+
+    const input =
+        document.getElementById(id);
+
+    if (input.type === "password") {
+
+        input.type = "text";
+
+    } else {
+
+        input.type = "password";
+
+    }
+}
+
+
+function accountTypeChanged() {
+
+    const role =
+        document.getElementById("role").value;
+
+    const driverFields =
+        document.getElementById("driverFields");
+
+    if (role === "driver") {
+
+        driverFields.classList.add("show-fields");
+
+    } else {
+
+        driverFields.classList.remove("show-fields");
+
+    }
+}
+
+
+function createAccount(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    const role =
+        document.getElementById("role").value;
+
+
+    if (phone.length !== 10 || isNaN(phone)) {
+
+        showToast(
+            "Please enter a valid 10-digit mobile number."
+        );
+
+        return;
+    }
+
+
+    if (password.length < 6) {
+
+        showToast(
+            "Password must contain at least 6 characters."
+        );
+
+        return;
+    }
+
+
+    if (password !== confirmPassword) {
+
+        showToast(
+            "Passwords do not match."
+        );
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "autosetuUser",
+        name
+    );
+
+    localStorage.setItem(
+        "autosetuPhone",
+        phone
+    );
+
+    localStorage.setItem(
+        "autosetuEmail",
+        email
+    );
+
+    localStorage.setItem(
+        "autosetuRole",
+        role
+    );
+
+
+    if (role === "driver") {
+
+        localStorage.setItem(
+            "autosetuVehicle",
+            document.getElementById("vehicleType").value
+        );
+
+        localStorage.setItem(
+            "autosetuVehicleNumber",
+            document.getElementById("vehicleNumber").value
+        );
+
+        localStorage.setItem(
+            "autosetuLicense",
+            document.getElementById("licenseStatus").value
+        );
+    }
+
+
+    document.getElementById("signupForm")
+        .style.display = "none";
+
+    document.getElementById("success")
+        .style.display = "block";
+
+    showToast(
+        "Account created successfully ✓"
+    );
+}
+
+
+function goToDashboard() {
+
+    const role =
+        localStorage.getItem("autosetuRole");
+
+    if (role === "driver") {
+
+        window.location.href =
+            "driver.html";
+
+    } else {
+
+        window.location.href =
+            "passenger.html";
+
+    }
+}
+
+</script>
+
+</body>
+</html>
