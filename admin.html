@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoSetu - Admin Dashboard</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#172033;
+}
+
+.header{
+    background:#ffffff;
+    padding:16px 5%;
+    display:flex;
+    align-items:center;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    margin-right:auto;
+}
+
+.logo span{
+    color:#ff7200;
+}
+
+.back{
+    text-decoration:none;
+    color:#172033;
+    margin-right:15px;
+}
+
+.btn{
+    border:0;
+    padding:11px 18px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.orange{
+    background:#ff7200;
+    color:white;
+}
+
+.red{
+    background:#d92d20;
+    color:white;
+}
+
+.green{
+    background:#12a150;
+    color:white;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:35px 5%;
+}
+
+.heading{
+    margin-bottom:25px;
+}
+
+.heading small{
+    color:#ff7200;
+    font-weight:bold;
+}
+
+.heading h1{
+    margin-top:8px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:22px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    margin-bottom:7px;
+}
+
+.stat span{
+    color:#667085;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:20px;
+}
+
+.card{
+    background:white;
+    padding:22px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.card h2{
+    margin-bottom:18px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px 8px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
+
+th{
+    background:#fafafa;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.verified{
+    background:#e8fff3;
+    color:#078b52;
+}
+
+.pending{
+    background:#fff4e5;
+    color:#b54708;
+}
+
+.high{
+    background:#ffe9e7;
+    color:#d92d20;
+}
+
+.risk{
+    padding:15px;
+    border-radius:10px;
+    margin:10px 0;
+}
+
+.low{
+    background:#e8fff3;
+}
+
+.medium{
+    background:#fff4e5;
+}
+
+.high-risk{
+    background:#ffe9e7;
+}
+
+.heatmap{
+    min-height:300px;
+    border-radius:12px;
+    background:
+    linear-gradient(45deg,#e7f1e7 25%,transparent 25%),
+    linear-gradient(-45deg,#e7f1e7 25%,transparent 25%),
+    #eef3ee;
+    background-size:60px 60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    line-height:2;
+    font-size:18px;
+}
+
+.action-buttons{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.notification{
+    padding:14px;
+    background:#fff7ed;
+    border-left:4px solid #ff7200;
+    margin:10px 0;
+    border-radius:8px;
+}
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:35px;
+    margin-top:40px;
+}
+
+footer p{
+    color:#c7cbd3;
+    margin-top:8px;
+}
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#172033;
+    color:white;
+    padding:15px 20px;
+    border-radius:10px;
+    display:none;
+    z-index:1000;
+}
+
+@media(max-width:800px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        flex-wrap:wrap;
+        gap:12px;
+    }
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    table{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        🛺 Auto<span>Setu</span>
+    </div>
+
+    <a href="index.html" class="back">
+        ← Home
+    </a>
+
+    <button class="btn red" onclick="logout()">
+        Logout
+    </button>
+
+</header>
+
+
+<main class="container">
+
+    <div class="heading">
+
+        <small>ADMIN CONTROL CENTER</small>
+
+        <h1>
+            👨‍💼 AutoSetu Admin Dashboard
+        </h1>
+
+        <p style="margin-top:8px;color:#667085">
+            Monitor users, drivers, rides, carpools,
+            reports, verification and system activity.
+        </p>
+
+    </div>
+
+
+    <!-- MAIN STATISTICS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>1,248</strong>
+            <span>👥 Total Users</span>
+        </div>
+
+        <div class="stat">
+            <strong>342</strong>
+            <span>🚕 Registered Drivers</span>
+        </div>
+
+        <div class="stat">
+            <strong>87</strong>
+            <span>🟢 Online Drivers</span>
+        </div>
+
+        <div class="stat">
+            <strong>31</strong>
+            <span>🚕 Active Rides</span>
+        </div>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>64</strong>
+            <span>🚗 Active Carpools</span>
+        </div>
+
+        <div class="stat">
+            <strong>7</strong>
+            <span>🚨 Open Reports</span>
+        </div>
+
+        <div class="stat">
+            <strong class="high">3</strong>
+            <span>🔴 High Risk</span>
+        </div>
+
+        <div class="stat">
+            <strong>98%</strong>
+            <span>⚡ System Health</span>
+        </div>
+
+    </div>
+
+
+    <!-- USER MANAGEMENT -->
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h2>👥 User Management</h2>
+
+            <table>
+
+                <tr>
+                    <th>User</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+                <tr>
+                    <td>Sakina</td>
+                    <td>Passenger</td>
+                    <td>
+                        <span class="badge verified">
+                            Active
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn red"
+                                onclick="manageUser('Sakina')">
+                            Manage
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Aman</td>
+                    <td>Passenger</td>
+                    <td>
+                        <span class="badge verified">
+                            Active
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn red"
+                                onclick="manageUser('Aman')">
+                            Manage
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Rahul</td>
+                    <td>Passenger</td>
+                    <td>
+                        <span class="badge pending">
+                            Review
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn orange"
+                                onclick="manageUser('Rahul')">
+                            Review
+                        </button>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <!-- DRIVER MANAGEMENT -->
+
+        <div class="card">
+
+            <h2>🚕 Driver Management</h2>
+
+            <table>
+
+                <tr>
+                    <th>Driver</th>
+                    <th>Rating</th>
+                    <th>Verification</th>
+                    <th>Action</th>
+                </tr>
+
+                <tr>
+                    <td>Aman Kumar</td>
+                    <td>⭐ 4.8</td>
+                    <td>
+                        <span class="badge verified">
+                            Verified
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn orange"
+                                onclick="viewDriver()">
+                            View
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Raj Kumar</td>
+                    <td>⭐ 4.7</td>
+                    <td>
+                        <span class="badge verified">
+                            Verified
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn orange"
+                                onclick="viewDriver()">
+                            View
+                        </button>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- VERIFICATION + VEHICLES -->
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h2>🪪 Verification Management</h2>
+
+            <div class="notification">
+
+                <b>Aman Kumar</b>
+
+                <p>
+                    Driving License:
+                    <span class="badge verified">
+                        Verified
+                    </span>
+                </p>
+
+                <p>
+                    Vehicle Document:
+                    <span class="badge verified">
+                        Verified
+                    </span>
+                </p>
+
+                <p>
+                    Insurance:
+                    <span class="badge verified">
+                        Valid
+                    </span>
+                </p>
+
+                <div class="action-buttons">
+
+                    <button class="btn green"
+                            onclick="approveVerification()">
+                        ✓ Approve
+                    </button>
+
+                    <button class="btn orange"
+                            onclick="reviewVerification()">
+                        Review
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="notification">
+
+                <b>Rahul Singh</b>
+
+                <p>
+                    Driving License:
+                    <span class="badge pending">
+                        Pending
+                    </span>
+                </p>
+
+                <div class="action-buttons">
+
+                    <button class="btn green"
+                            onclick="approveVerification()">
+                        ✓ Verify
+                    </button>
+
+                    <button class="btn red"
+                            onclick="rejectVerification()">
+                        Reject
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>🚗 Vehicle Management</h2>
+
+            <table>
+
+                <tr>
+                    <th>Vehicle</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>PB-07-AB-1234</td>
+                    <td>Auto</td>
+                    <td>
+                        <span class="badge verified">
+                            Verified
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>PB-07-CD-5678</td>
+                    <td>Cab</td>
+                    <td>
+                        <span class="badge verified">
+                            Verified
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>PB-07-EF-9012</td>
+                    <td>Taxi</td>
+                    <td>
+                        <span class="badge pending">
+                            Pending
+                        </span>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIDE MONITORING -->
+
+    <div class="card" style="margin-top:20px">
+
+        <h2>🚕 Live Ride Monitoring</h2>
+
+        <table>
+
+            <tr>
+                <th>Ride ID</th>
+                <th>Passenger</th>
+                <th>Driver</th>
+                <th>Route</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>AS-10021</td>
+                <td>Sakina</td>
+                <td>Aman</td>
+                <td>University → Bus Stand</td>
+                <td>
+                    <span class="badge verified">
+                        STARTED
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>AS-10022</td>
+                <td>Rahul</td>
+                <td>Raj</td>
+                <td>Market → Railway Station</td>
+                <td>
+                    <span class="badge pending">
+                        DRIVER ON WAY
+                    </span>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- REPORTS -->
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h2>🚨 Reports & Complaints</h2>
+
+            <div class="notification">
+
+                <b>Report #1021</b>
+
+                <p>
+                    Category: Dangerous Driving
+                </p>
+
+                <p>
+                    Status:
+                    <span class="badge pending">
+                        OPEN
+                    </span>
+                </p>
+
+                <button class="btn orange"
+                        onclick="reviewReport(1021)">
+                    Review Report
+                </button>
+
+            </div>
+
+
+            <div class="notification">
+
+                <b>Report #1022</b>
+
+                <p>
+                    Category: Suspicious Behaviour
+                </p>
+
+                <p>
+                    Status:
+                    <span class="badge pending">
+                        OPEN
+                    </span>
+                </p>
+
+                <button class="btn orange"
+                        onclick="reviewReport(1022)">
+                    Review Report
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RISK ENGINE -->
+
+        <div class="card">
+
+            <h2>🛡️ AutoSetu Risk Engine</h2>
+
+            <div class="risk low">
+
+                🟢 <b>LOW RISK</b>
+
+                <p>
+                    Normal account activity.
+                </p>
+
+            </div>
+
+            <div class="risk medium">
+
+                🟡 <b>MEDIUM RISK</b>
+
+                <p>
+                    Multiple cancellations detected.
+                </p>
+
+            </div>
+
+            <div class="risk high-risk">
+
+                🔴 <b>HIGH RISK</b>
+
+                <p>
+                    Repeated reports require admin review.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ANALYTICS -->
+
+    <div class="card" style="margin-top:20px">
+
+        <h2>📊 Analytics</h2>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>520</strong>
+                <span>Daily Rides</span>
+            </div>
+
+            <div class="stat">
+                <strong>1,840</strong>
+                <span>Active Users</span>
+            </div>
+
+            <div class="stat">
+                <strong>78%</strong>
+                <span>Driver Utilization</span>
+            </div>
+
+            <div class="stat">
+                <strong>64</strong>
+                <span>Carpool Trips</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DEMAND HEATMAP -->
+
+    <div class="card" style="margin-top:20px">
+
+        <h2>🗺️ Location / Demand Heatmap</h2>
+
+        <div class="heatmap">
+
+            <div>
+
+                🔴 <b>Railway Station</b>
+                — HIGH DEMAND<br>
+
+                🟡 <b>Market</b>
+                — MEDIUM DEMAND<br>
+
+                🔴 <b>Bus Stand</b>
+                — HIGH DEMAND<br>
+
+                🟢 <b>University</b>
+                — LOW DEMAND
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN ACTIONS -->
+
+    <div class="card" style="margin-top:20px">
+
+        <h2>⚙️ Administrative Actions</h2>
+
+        <div class="action-buttons">
+
+            <button class="btn orange"
+                    onclick="toast('User management opened')">
+                👥 Manage Users
+            </button>
+
+            <button class="btn orange"
+                    onclick="toast('Driver management opened')">
+                🚕 Manage Drivers
+            </button>
+
+            <button class="btn orange"
+                    onclick="toast('Ride monitoring opened')">
+                🚕 Monitor Rides
+            </button>
+
+            <button class="btn orange"
+                    onclick="toast('Carpool monitoring opened')">
+                🚗 Monitor Carpools
+            </button>
+
+            <button class="btn red"
+                    onclick="suspendAccount()">
+                🚫 Suspend Account
+            </button>
+
+            <button class="btn green"
+                    onclick="restoreAccount()">
+                ✓ Restore Account
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <h2>🛺 AutoSetu</h2>
+
+    <p>
+        Admin Control Center · Smart Mobility Platform
+    </p>
+
+    <p>
+        © 2026 AutoSetu. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+function toast(message){
+
+    const box =
+        document.getElementById("toast");
+
+    box.textContent = message;
+
+    box.style.display = "block";
+
+    setTimeout(function(){
+
+        box.style.display = "none";
+
+    },3000);
+}
+
+
+function manageUser(name){
+
+    toast(
+        "Managing user: " + name
+    );
+}
+
+
+function viewDriver(){
+
+    toast(
+        "Driver profile opened ✓"
+    );
+}
+
+
+function approveVerification(){
+
+    toast(
+        "Verification approved ✓"
+    );
+}
+
+
+function reviewVerification(){
+
+    toast(
+        "Verification sent for admin review"
+    );
+}
+
+
+function rejectVerification(){
+
+    toast(
+        "Verification rejected"
+    );
+}
+
+
+function reviewReport(id){
+
+    toast(
+        "Report #" + id + " opened"
+    );
+}
+
+
+function suspendAccount(){
+
+    const answer =
+        confirm(
+            "Suspend selected account?"
+        );
+
+    if(answer){
+
+        toast(
+            "Account suspended ✓"
+        );
+    }
+}
+
+
+function restoreAccount(){
+
+    toast(
+        "Account restored ✓"
+    );
+}
+
+
+function logout(){
+
+    const answer =
+        confirm(
+            "Logout from Admin?"
+        );
+
+    if(answer){
+
+        window.location.href =
+            "index.html";
+    }
+}
+
+</script>
+
+</body>
+</html>
