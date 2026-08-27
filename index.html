@@ -1,362 +1,1828 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoSetu - One App For Every Journey</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoSetu — Smart Local Mobility</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#172033;
+}
+
+button,input,select,textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:15px 5%;
+    background:#fff;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    margin-right:auto;
+}
+
+.logo span span{
+    color:#ff7200;
+}
+
+.nav{
+    display:flex;
+    gap:5px;
+}
+
+.nav button{
+    border:0;
+    background:transparent;
+    padding:10px 13px;
+    border-radius:8px;
+}
+
+.nav button:hover{
+    background:#fff1e5;
+}
+
+.primary{
+    background:#ff7200;
+    color:white;
+    border:0;
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.secondary{
+    background:white;
+    border:1px solid #ddd;
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.danger{
+    background:#d92d20;
+    color:white;
+    border:0;
+    padding:12px 18px;
+    border-radius:10px;
+}
+
+.page{
+    display:none;
+    max-width:1200px;
+    margin:auto;
+    padding:35px 5%;
+}
+
+.page.active{
+    display:block;
+}
+
+.hero{
+    min-height:550px;
+    display:grid;
+    grid-template-columns:1.3fr .9fr;
+    gap:40px;
+    align-items:center;
+    padding:60px 5%;
+    background:linear-gradient(135deg,#fff7ef,#ffffff);
+}
+
+.hero h1{
+    font-size:55px;
+    line-height:1.05;
+    margin:15px 0;
+}
+
+.hero h1 span{
+    color:#ff7200;
+}
+
+.hero p{
+    font-size:18px;
+    line-height:1.6;
+    color:#667085;
+    max-width:650px;
+}
+
+.small{
+    font-size:13px!important;
+    font-weight:bold;
+    color:#ff7200!important;
+    letter-spacing:1px;
+}
+
+.actions{
+    display:flex;
+    gap:12px;
+    margin-top:25px;
+}
+
+.booking-card,
+.card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+.booking-card h2{
+    margin-bottom:20px;
+}
+
+.location{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:10px;
+    margin:10px 0;
+}
+
+.location input{
+    width:100%;
+    border:0;
+    outline:0;
+    padding:8px;
+}
+
+.location button{
+    border:0;
+    background:#fff1e5;
+    padding:8px;
+    border-radius:7px;
+}
+
+.quick{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin:15px 0;
+}
+
+.quick button{
+    border:1px solid #ddd;
+    background:white;
+    padding:8px 10px;
+    border-radius:8px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.section-title p{
+    color:#ff7200;
+    font-weight:bold;
+}
+
+.section-title h2{
+    font-size:32px;
+    margin-top:8px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.grid4{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.service{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    border:2px solid transparent;
+    cursor:pointer;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.service:hover,
+.service.active{
+    border-color:#ff7200;
+    transform:translateY(-2px);
+}
+
+.icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.service p,
+.card p{
+    color:#667085;
+    margin-top:7px;
+    line-height:1.5;
+}
+
+.dashboard-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.dashboard-head h2{
+    font-size:30px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.stat span{
+    color:#667085;
+}
+
+.form{
+    display:grid;
+    gap:15px;
+}
+
+.form label{
+    font-weight:bold;
+}
+
+.form input,
+.form select,
+.form textarea{
+    width:100%;
+    margin-top:7px;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:9px;
+    outline:none;
+}
+
+.two{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.map{
+    min-height:360px;
+    border-radius:15px;
+    background:
+    linear-gradient(45deg,#e7f1e7 25%,transparent 25%),
+    linear-gradient(-45deg,#e7f1e7 25%,transparent 25%),
+    #eef3ee;
+    background-size:60px 60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    text-align:center;
+    padding:20px;
+}
+
+.driver-card,
+.ride-card,
+.carpool-card,
+.report-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    padding:18px;
+    border-radius:14px;
+    margin:12px 0;
+}
+
+.driver-card{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.driver-photo{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#fff1e5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    background:#e8fff3;
+    color:#078b52;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:20px;
+    background:#fff4e5;
+    color:#b54708;
+    display:inline-block;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.green{
+    color:#12a150;
+}
+
+.red{
+    color:#d92d20;
+}
+
+.orange{
+    color:#ff7200;
+}
+
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th,td{
+    padding:13px;
+    text-align:left;
+    border-bottom:1px solid #eee;
+}
+
+th{
+    background:#fafafa;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(450px,100%);
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:15px;
+    top:10px;
+    border:0;
+    background:none;
+    font-size:28px;
+}
+
+.role-buttons{
+    display:grid;
+    gap:10px;
+    margin-top:20px;
+}
+
+.offer{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    border:1px solid #eee;
+}
+
+.safety-box{
+    text-align:center;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+}
+
+.sos{
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    background:#d92d20;
+    color:white;
+    border:6px solid #ffd5d2;
+    font-weight:bold;
+    font-size:20px;
+    margin-top:15px;
+}
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#172033;
+    color:white;
+    padding:15px 20px;
+    border-radius:10px;
+    display:none;
+    z-index:3000;
+}
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:40px 20px;
+    margin-top:40px;
+}
+
+footer p{
+    color:#c7cbd3;
+    margin:10px;
+}
+
+@media(max-width:800px){
+    .header{
+        flex-wrap:wrap;
+    }
+
+    .nav{
+        order:3;
+        width:100%;
+        overflow:auto;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .grid,
+    .grid4,
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .two{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:520px){
+    .grid,
+    .grid4,
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header class="header">
+
     <div class="logo">
-        🛺 <span>Auto<span>Setu</span></span>
+        🛺 Auto<span>Setu</span>
     </div>
 
-    <nav id="navMenu">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#offers">Offers</a>
-        <a href="#safety">Safety</a>
-        <a href="#history">My Rides</a>
+    <nav class="nav">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('passenger')">Passenger</button>
+        <button onclick="showPage('driver')">Driver</button>
+        <button onclick="showPage('carpool')">Carpool</button>
+        <button onclick="showPage('admin')">Admin</button>
     </nav>
 
-    <button class="login-btn" onclick="openLogin()">Login / Sign Up</button>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <button class="primary" onclick="openLogin()">
+        Login / Sign Up
+    </button>
+
 </header>
 
 
-<section class="hero" id="home">
+<!-- HOME -->
 
-    <div class="hero-content">
-        <p class="small-title">INDIA'S LOCAL MOBILITY PLATFORM</p>
+<section id="home" class="page active">
 
-        <h1>One App.<br>
-            <span>Every Journey.</span>
-        </h1>
+    <div class="hero">
 
-        <p>
-            Book bikes, autos, taxis, cabs, parcel delivery,
-            public transport and stays — all in one place.
+        <div>
+
+            <p class="small">INDIA'S SMART LOCAL MOBILITY PLATFORM</p>
+
+            <h1>
+                One App.<br>
+                <span>Every Journey.</span>
+            </h1>
+
+            <p>
+                AutoSetu connects passengers, drivers and carpool users
+                through location-based smart mobility.
+            </p>
+
+            <div class="actions">
+                <button class="primary" onclick="showPage('passenger')">
+                    🚕 Book a Ride
+                </button>
+
+                <button class="secondary" onclick="showPage('carpool')">
+                    🚗 Find Carpool
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="booking-card">
+
+            <h2>📍 Where do you want to go?</h2>
+
+            <div class="location">
+                📍
+                <input id="pickup" placeholder="Pickup location">
+                <button onclick="getLocation()">GPS</button>
+            </div>
+
+            <div class="location">
+                📌
+                <input id="destination" placeholder="Destination">
+            </div>
+
+            <div class="quick">
+
+                <button onclick="setPickup('Current Location')">
+                    📍 Current Location
+                </button>
+
+                <button onclick="setPickup('University')">
+                    🎓 University
+                </button>
+
+                <button onclick="setPickup('Bus Stand')">
+                    🚌 Bus Stand
+                </button>
+
+            </div>
+
+            <button class="primary" style="width:100%"
+                    onclick="showPage('passenger')">
+                Search Rides
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="section-title" style="margin-top:55px">
+        <p>CORE FEATURES</p>
+        <h2>Everything You Need</h2>
+    </div>
+
+    <div class="grid">
+
+        <div class="service">
+            <div class="icon">📍</div>
+            <h3>Location</h3>
+            <p>GPS and nearby driver discovery.</p>
+        </div>
+
+        <div class="service">
+            <div class="icon">🤖</div>
+            <h3>AI Matching</h3>
+            <p>Smart ride and carpool matching.</p>
+        </div>
+
+        <div class="service">
+            <div class="icon">🛡️</div>
+            <h3>Safety</h3>
+            <p>SOS, reporting and trip tracking.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PASSENGER -->
+
+<section id="passenger" class="page">
+
+    <div class="dashboard-head">
+
+        <div>
+            <p class="small">PASSENGER DASHBOARD</p>
+            <h2>Welcome, Passenger 👋</h2>
+        </div>
+
+        <button class="primary" onclick="findDrivers()">
+            📍 Find Nearby Drivers
+        </button>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong id="passengerRides">12</strong>
+            <span>Total Rides</span>
+        </div>
+
+        <div class="stat">
+            <strong>4.9 ⭐</strong>
+            <span>Your Rating</span>
+        </div>
+
+        <div class="stat">
+            <strong>8</strong>
+            <span>Saved Places</span>
+        </div>
+
+        <div class="stat">
+            <strong>₹1,840</strong>
+            <span>Ride Spending</span>
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>📍 Book Ride</h3>
+
+            <div class="form">
+
+                <label>
+                    Pickup
+                    <input id="pPickup" placeholder="Enter pickup">
+                </label>
+
+                <label>
+                    Destination
+                    <input id="pDestination" placeholder="Enter destination">
+                </label>
+
+                <label>
+                    Vehicle
+                    <select id="vehicle">
+                        <option>Auto</option>
+                        <option>Bike</option>
+                        <option>Taxi</option>
+                        <option>Cab</option>
+                    </select>
+                </label>
+
+                <button class="primary" onclick="requestRide()">
+                    Request Ride
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="map">
+
+            🗺️<br>
+            Your Map<br>
+            <small>
+                📍 Current location<br>
+                🛺 Nearby drivers
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:20px">
+
+        <h3>🛺 Nearby Drivers</h3>
+
+        <div id="nearbyDrivers">
+
+            <div class="driver-card">
+
+                <div class="driver-photo">👨</div>
+
+                <div style="flex:1">
+
+                    <h3>Aman</h3>
+
+                    <p>
+                        ⭐ 4.8 · Auto · 0.8 km away
+                    </p>
+
+                    <span class="badge">
+                        ✓ Verified
+                    </span>
+
+                </div>
+
+                <button class="primary"
+                        onclick="requestRide()">
+                    Request
+                </button>
+
+            </div>
+
+
+            <div class="driver-card">
+
+                <div class="driver-photo">👨‍🦱</div>
+
+                <div style="flex:1">
+
+                    <h3>Rahul</h3>
+
+                    <p>
+                        ⭐ 4.7 · Auto · 1.2 km away
+                    </p>
+
+                    <span class="badge">
+                        ✓ Verified
+                    </span>
+
+                </div>
+
+                <button class="primary"
+                        onclick="requestRide()">
+                    Request
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:20px">
+
+        <h3>🔄 Current Ride</h3>
+
+        <div class="ride-card">
+
+            <p>
+                <b>Ride ID:</b> AS-10021
+            </p>
+
+            <p>
+                📍 University → Bus Stand
+            </p>
+
+            <p>
+                Status:
+                <span class="status" id="rideStatus">
+                    REQUESTED
+                </span>
+            </p>
+
+            <div class="actions">
+
+                <button onclick="changeRideStatus('DRIVER ON THE WAY')">
+                    Driver on the way
+                </button>
+
+                <button onclick="changeRideStatus('STARTED')">
+                    Start Ride
+                </button>
+
+                <button onclick="changeRideStatus('COMPLETED')">
+                    Complete
+                </button>
+
+                <button class="danger"
+                        onclick="cancelRide()">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:20px">
+
+        <h3>⭐ Rate Driver</h3>
+
+        <div class="two">
+
+            <select id="rating">
+                <option value="5">⭐⭐⭐⭐⭐ 5</option>
+                <option value="4">⭐⭐⭐⭐ 4</option>
+                <option value="3">⭐⭐⭐ 3</option>
+                <option value="2">⭐⭐ 2</option>
+                <option value="1">⭐ 1</option>
+            </select>
+
+            <input id="review"
+                   placeholder="Write a review">
+
+        </div>
+
+        <button class="primary"
+                style="margin-top:12px"
+                onclick="submitRating()">
+            Submit Rating
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- DRIVER -->
+
+<section id="driver" class="page">
+
+    <div class="dashboard-head">
+
+        <div>
+            <p class="small">DRIVER DASHBOARD</p>
+            <h2>Driver Panel 🚕</h2>
+        </div>
+
+        <button id="onlineButton"
+                class="primary"
+                onclick="toggleOnline()">
+            🟢 GO ONLINE
+        </button>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>86</strong>
+            <span>Completed Rides</span>
+        </div>
+
+        <div class="stat">
+            <strong>4.8 ⭐</strong>
+            <span>Driver Rating</span>
+        </div>
+
+        <div class="stat">
+            <strong>92%</strong>
+            <span>Acceptance Rate</span>
+        </div>
+
+        <div class="stat">
+            <strong>₹24,500</strong>
+            <span>Total Earnings</span>
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>👤 Driver Profile</h3>
+
+            <p>👨 Aman Kumar</p>
+            <p>⭐ Rating: 4.8 / 5</p>
+            <p>🪪 License: <span class="badge">Verified</span></p>
+            <p>🚗 Vehicle: <span class="badge">Verified</span></p>
+            <p>🛡️ Insurance: <span class="badge">Valid</span></p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🚕 Vehicle</h3>
+
+            <p>Vehicle Type: Auto</p>
+            <p>Number: PB-07-AB-1234</p>
+            <p>Vehicle Verification: ✓</p>
+
+            <button class="secondary"
+                    onclick="toast('Vehicle details opened')">
+                View Vehicle
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:20px">
+
+        <h3>🔔 Incoming Ride Request</h3>
+
+        <div class="ride-card">
+
+            <h3>Passenger Request</h3>
+
+            <p>📍 Pickup: University</p>
+            <p>📌 Destination: Bus Stand</p>
+            <p>📏 Distance: 4.2 km</p>
+            <p>💰 Suggested Fare: ₹116</p>
+
+            <p>
+                🤖 AI Match:
+                <strong class="green">92%</strong>
+            </p>
+
+            <div class="actions">
+
+                <button class="primary"
+                        onclick="acceptDriverRide()">
+                    ✓ Accept
+                </button>
+
+                <button onclick="toast('Ride request rejected')">
+                    ✕ Reject
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:20px">
+
+        <h3>📍 Driver Location</h3>
+
+        <div class="map">
+            🚕<br>
+            Driver GPS Location<br>
+            <small>Location sharing enabled</small>
+        </div>
+
+        <button class="primary"
+                style="margin-top:12px"
+                onclick="getDriverLocation()">
+            📍 Share Current Location
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- CARPOOL -->
+
+<section id="carpool" class="page">
+
+    <div class="dashboard-head">
+
+        <div>
+            <p class="small">CARPOOL</p>
+            <h2>🚗 Share Your Journey</h2>
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>Create Carpool Listing</h3>
+
+            <div class="form">
+
+                <label>
+                    Starting Location
+                    <input id="cpStart"
+                           placeholder="Chandigarh">
+                </label>
+
+                <label>
+                    Destination
+                    <input id="cpEnd"
+                           placeholder="Delhi">
+                </label>
+
+                <div class="two">
+
+                    <label>
+                        Date
+                        <input id="cpDate" type="date">
+                    </label>
+
+                    <label>
+                        Departure Time
+                        <input id="cpTime" type="time">
+                    </label>
+
+                </div>
+
+                <div class="two">
+
+                    <label>
+                        Available Seats
+                        <input id="cpSeats"
+                               type="number"
+                               min="1"
+                               value="3">
+                    </label>
+
+                    <label>
+                        Cost Contribution ₹
+                        <input id="cpCost"
+                               type="number"
+                               value="200">
+                    </label>
+
+                </div>
+
+                <label>
+                    Vehicle Information
+                    <input id="cpVehicle"
+                           placeholder="White Swift">
+                </label>
+
+                <button class="primary"
+                        onclick="createCarpool()">
+                    Publish Carpool
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🔎 Search Carpool</h3>
+
+            <div class="form">
+
+                <input id="cpSearch"
+                       placeholder="Search route">
+
+                <input id="cpSearchDate"
+                       type="date">
+
+                <button class="primary"
+                        onclick="searchCarpool()">
+                    Search
+                </button>
+
+            </div>
+
+            <div id="carpoolResults">
+
+                <div class="carpool-card">
+
+                    <h3>🚗 Aman</h3>
+
+                    <p>
+                        Chandigarh → Delhi
+                    </p>
+
+                    <p>
+                        📅 Tomorrow · 8:00 AM
+                    </p>
+
+                    <p>
+                        💺 3 seats available
+                    </p>
+
+                    <p>
+                        💰 ₹200 contribution
+                    </p>
+
+                    <p>
+                        🤖 AI Match:
+                        <strong class="green">96%</strong>
+                    </p>
+
+                    <button class="primary"
+                            onclick="requestCarpool()">
+                        Request Seat
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="admin" class="page">
+
+    <div class="dashboard-head">
+
+        <div>
+            <p class="small">ADMIN PANEL</p>
+            <h2>👨‍💼 AutoSetu Admin Dashboard</h2>
+        </div>
+
+        <button class="primary"
+                onclick="refreshAdmin()">
+            🔄 Refresh
+        </button>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong id="adminUsers">1,248</strong>
+            <span>Users</span>
+        </div>
+
+        <div class="stat">
+            <strong id="adminDrivers">342</strong>
+            <span>Drivers</span>
+        </div>
+
+        <div class="stat">
+            <strong>87</strong>
+            <span>Online Drivers</span>
+        </div>
+
+        <div class="stat">
+            <strong>31</strong>
+            <span>Active Rides</span>
+        </div>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>64</strong>
+            <span>Carpools</span>
+        </div>
+
+        <div class="stat">
+            <strong>7</strong>
+            <span>Reports</span>
+        </div>
+
+        <div class="stat">
+            <strong class="red">3</strong>
+            <span>High Risk</span>
+        </div>
+
+        <div class="stat">
+            <strong>92%</strong>
+            <span>System Health</span>
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>👥 User Management</h3>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <tr>
+                        <th>User</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                    <tr>
+                        <td>Sakina</td>
+                        <td>Passenger</td>
+                        <td class="green">Active</td>
+                        <td>
+                            <button onclick="blockUser('Sakina')">
+                                Manage
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Aman</td>
+                        <td>Driver</td>
+                        <td class="green">Active</td>
+                        <td>
+                            <button onclick="blockUser('Aman')">
+                                Manage
+                            </button>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🪪 Verification Management</h3>
+
+            <div class="report-card">
+
+                <p>
+                    👨 Aman Kumar
+                </p>
+
+                <p>
+                    Driving License:
+                    <span class="badge">Verified</span>
+                </p>
+
+                <p>
+                    Vehicle:
+                    <span class="badge">Verified</span>
+                </p>
+
+                <button onclick="toast('Verification approved')">
+                    ✓ Approve
+                </button>
+
+                <button onclick="toast('Verification sent for review')">
+                    Review
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="grid" style="margin-top:20px">
+
+        <div class="card">
+
+            <h3>🚨 Reports</h3>
+
+            <div class="report-card">
+
+                <p>
+                    <b>Report #1021</b>
+                </p>
+
+                <p>
+                    Category: Dangerous Driving
+                </p>
+
+                <p>
+                    Status:
+                    <span class="status">OPEN</span>
+                </p>
+
+                <button onclick="reviewReport()">
+                    Review Report
+                </button>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <p>
+                    <b>Report #1022</b>
+                </p>
+
+                <p>
+                    Category: Suspicious Behaviour
+                </p>
+
+                <p>
+                    Status:
+                    <span class="status">OPEN</span>
+                </p>
+
+                <button onclick="reviewReport()">
+                    Review Report
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🛡️ Risk Engine</h3>
+
+            <div class="report-card">
+
+                <h3 class="green">
+                    🟢 Low Risk
+                </h3>
+
+                <p>
+                    Normal account activity.
+                </p>
+
+            </div>
+
+            <div class="report-card">
+
+                <h3 class="orange">
+                    🟡 Medium Risk
+                </h3>
+
+                <p>
+                    Multiple cancellations detected.
+                </p>
+
+            </div>
+
+            <div class="report-card">
+
+                <h3 class="red">
+                    🔴 High Risk
+                </h3>
+
+                <p>
+                    Repeated reports require admin review.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:20px">
+
+        <h3>📊 Analytics</h3>
+
+        <div class="grid4">
+
+            <div class="stat">
+                <strong>520</strong>
+                <span>Daily Rides</span>
+            </div>
+
+            <div class="stat">
+                <strong>1,840</strong>
+                <span>Active Users</span>
+            </div>
+
+            <div class="stat">
+                <strong>Railway Station</strong>
+                <span>Popular Location</span>
+            </div>
+
+            <div class="stat">
+                <strong>6–7 PM</strong>
+                <span>Peak Hour</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:20px">
+
+        <h3>🗺️ Demand Heatmap</h3>
+
+        <div class="map">
+
+            🔴 Railway Station<br>
+            🟡 Market<br>
+            🔴 Bus Stand<br>
+            🟢 University
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SAFETY -->
+
+<section id="safetyPage" class="page">
+
+    <div class="section-title">
+
+        <p>SAFETY</p>
+
+        <h2>Your Safety Comes First</h2>
+
+    </div>
+
+    <div class="grid">
+
+        <div class="safety-box">
+
+            <div class="icon">🛡️</div>
+
+            <h3>Verified Drivers</h3>
+
+            <p>
+                Driver and vehicle verification status
+                is visible before a ride.
+            </p>
+
+        </div>
+
+
+        <div class="safety-box">
+
+            <div class="icon">📍</div>
+
+            <h3>Trip Tracking</h3>
+
+            <p>
+                Active ride location can be shared
+                with trusted contacts.
+            </p>
+
+        </div>
+
+
+        <div class="safety-box">
+
+            <div class="icon">🚨</div>
+
+            <h3>Emergency SOS</h3>
+
+            <p>
+                Prototype emergency alert system.
+            </p>
+
+            <button class="sos"
+                    onclick="sos()">
+                SOS
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+
+    <div class="modal-box">
+
+        <button class="close"
+                onclick="closeLogin()">
+            ×
+        </button>
+
+        <h2>Welcome to AutoSetu 🚕</h2>
+
+        <p style="margin-top:8px;color:#667085">
+            Select your account type.
         </p>
 
-        <button class="primary-btn" onclick="scrollToServices()">
-            Book a Ride →
-        </button>
-    </div>
 
+        <div class="role-buttons">
 
-    <div class="booking-card">
-
-        <h2>Where do you want to go?</h2>
-
-        <div class="location-box">
-            <span>📍</span>
-            <input id="pickup" type="text" placeholder="Pickup location">
-            <button onclick="getLocation()">GPS</button>
-        </div>
-
-        <div class="location-box">
-            <span>📌</span>
-            <input id="destination" type="text" placeholder="Where to?">
-        </div>
-
-        <div class="quick-location">
-            <button onclick="setLocation('Current Location')">
-                📍 Current Location
+            <button class="primary"
+                    onclick="loginAs('passenger')">
+                👤 Passenger Login
             </button>
-            <button onclick="setLocation('University')">
-                🎓 University
+
+            <button class="secondary"
+                    onclick="loginAs('driver')">
+                🚕 Driver Login
             </button>
-            <button onclick="setLocation('Bus Stand')">
-                🚌 Bus Stand
+
+            <button class="secondary"
+                    onclick="loginAs('admin')">
+                👨‍💼 Admin Login
             </button>
-        </div>
 
-        <button class="search-btn" onclick="searchRide()">
-            Search Rides
-        </button>
-
-    </div>
-
-</section>
-
-
-<section class="section" id="services">
-
-    <div class="section-heading">
-        <p>SERVICES</p>
-        <h2>Everything You Need to Travel</h2>
-    </div>
-
-    <div class="services-grid">
-
-        <div class="service-card active" onclick="selectService('Bike', 8)">
-            <div class="service-icon">🏍️</div>
-            <h3>Bike</h3>
-            <p>Fast & affordable</p>
-        </div>
-
-        <div class="service-card" onclick="selectService('Auto', 12)">
-            <div class="service-icon">🛺</div>
-            <h3>Auto</h3>
-            <p>Local rides</p>
-        </div>
-
-        <div class="service-card" onclick="selectService('Taxi', 15)">
-            <div class="service-icon">🚕</div>
-            <h3>Taxi</h3>
-            <p>Comfortable rides</p>
-        </div>
-
-        <div class="service-card" onclick="selectService('Cab', 18)">
-            <div class="service-icon">🚗</div>
-            <h3>Cab</h3>
-            <p>Premium travel</p>
-        </div>
-
-        <div class="service-card" onclick="selectService('Parcel', 20)">
-            <div class="service-icon">📦</div>
-            <h3>Parcel</h3>
-            <p>Send anything</p>
-        </div>
-
-        <div class="service-card" onclick="selectService('Metro', 5)">
-            <div class="service-icon">🚇</div>
-            <h3>Metro</h3>
-            <p>Metro routes</p>
-        </div>
-
-        <div class="service-card" onclick="selectService('Bus', 4)">
-            <div class="service-icon">🚌</div>
-            <h3>Bus</h3>
-            <p>City & intercity</p>
-        </div>
-
-        <div class="service-card" onclick="selectService('Carpool', 10)">
-            <div class="service-icon">👥</div>
-            <h3>Carpool</h3>
-            <p>Share your ride</p>
-        </div>
-
-        <div class="service-card" onclick="selectService('Stay', 1000)">
-            <div class="service-icon">🏨</div>
-            <h3>Stay</h3>
-            <p>Hotels & rooms</p>
         </div>
 
     </div>
 
-</section>
+</div>
 
 
-<section class="ride-section">
+<!-- SIGNUP MODAL -->
 
-    <div class="ride-panel">
+<div class="modal" id="signupModal">
 
-        <div>
-            <p class="small-title">QUICK BOOKING</p>
-            <h2 id="selectedTitle">Bike Ride</h2>
-            <p id="selectedText">
-                Find a nearby bike and reach your destination quickly.
-            </p>
-        </div>
+    <div class="modal-box">
 
-        <div class="fare-box">
-            <span>Estimated Fare</span>
-            <strong id="fare">₹80</strong>
-        </div>
-
-        <button class="primary-btn" onclick="bookRide()">
-            Book Now
+        <button class="close"
+                onclick="closeSignup()">
+            ×
         </button>
 
-    </div>
+        <h2>Create AutoSetu Account</h2>
 
-</section>
+        <div class="form"
+             style="margin-top:20px">
 
+            <label>
+                Name
+                <input id="signupName"
+                       placeholder="Your name">
+            </label>
 
-<section class="section" id="offers">
+            <label>
+                Mobile
+                <input id="signupPhone"
+                       placeholder="Mobile number">
+            </label>
 
-    <div class="section-heading">
-        <p>OFFERS</p>
-        <h2>Save More With AutoSetu</h2>
-    </div>
+            <label>
+                Email
+                <input id="signupEmail"
+                       type="email"
+                       placeholder="Email">
+            </label>
 
-    <div class="offers-grid">
+            <label>
+                Account Type
+                <select id="signupType">
 
-        <div class="offer-card">
-            <span>🎁</span>
-            <h3>NEW USER</h3>
-            <p>Get ₹50 OFF on your first ride.</p>
-            <button onclick="showOffer('FIRST50')">Use Offer</button>
-        </div>
+                    <option>Passenger</option>
+                    <option>Driver</option>
 
-        <div class="offer-card">
-            <span>🏍️</span>
-            <h3>BIKE RIDES</h3>
-            <p>Save more on everyday travel.</p>
-            <button onclick="showOffer('BIKE20')">Use Offer</button>
-        </div>
+                </select>
+            </label>
 
-        <div class="offer-card">
-            <span>📦</span>
-            <h3>PARCEL</h3>
-            <p>Special delivery charges.</p>
-            <button onclick="showOffer('PARCEL10')">Use Offer</button>
-        </div>
+            <button class="primary"
+                    onclick="signup()">
+                Create Account
+            </button>
 
-    </div>
-
-</section>
-
-
-<section class="section safety" id="safety">
-
-    <div class="section-heading">
-        <p>SAFETY</p>
-        <h2>Your Safety Comes First</h2>
-    </div>
-
-    <div class="safety-grid">
-
-        <div>
-            <span>🛡️</span>
-            <h3>Verified Drivers</h3>
-            <p>Driver verification helps create a trusted network.</p>
-        </div>
-
-        <div>
-            <span>📍</span>
-            <h3>Trip Tracking</h3>
-            <p>Share your trip and track your journey.</p>
-        </div>
-
-        <div>
-            <span>🆘</span>
-            <h3>Emergency SOS</h3>
-            <p>Quick access to emergency assistance.</p>
-            <button class="sos-btn" onclick="sos()">SOS</button>
         </div>
 
     </div>
 
-</section>
+</div>
 
 
-<section class="section" id="history">
-
-    <div class="section-heading">
-        <p>MY RIDES</p>
-        <h2>Ride History</h2>
-    </div>
-
-    <div id="historyList" class="history-list">
-        <p class="empty">No rides booked yet.</p>
-    </div>
-
-</section>
-
-
-<section class="download-section">
-
-    <div>
-        <p class="small-title">COMING SOON</p>
-        <h2>AutoSetu Mobile App</h2>
-        <p>Book rides, track drivers and manage your journeys from your phone.</p>
-    </div>
-
-    <div class="app-buttons">
-        <button>▶ Google Play</button>
-        <button> App Store</button>
-    </div>
-
-</section>
+<div class="toast" id="toastBox"></div>
 
 
 <footer>
 
-    <div class="footer-logo">🛺 AutoSetu</div>
+    <h2>🛺 AutoSetu</h2>
 
     <p>
-        One App For Every Journey
+        Smart Hyperlocal Mobility & Carpool Platform
     </p>
 
-    <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#safety">Safety</a>
-        <a href="#offers">Offers</a>
-    </div>
+    <p>
+        🚕 Rides · 🚗 Carpool · 🤖 AI · 🛡️ Safety · 📍 Location
+    </p>
 
-    <p class="copyright">
+    <p>
         © 2026 AutoSetu. All Rights Reserved.
     </p>
 
 </footer>
 
 
-<!-- LOGIN POPUP -->
+<script>
 
-<div class="modal" id="loginModal">
+let selectedService = "Auto";
+let online = false;
+let rideCount = 12;
 
-    <div class="modal-content">
+function showPage(page){
 
-        <button class="close" onclick="closeLogin()">×</button>
+    document.querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
 
-        <h2>Welcome to AutoSetu</h2>
-        <p>Login or create your account.</p>
+    const target = document.getElementById(page);
 
-        <input id="phone" type="tel" placeholder="Enter mobile number">
-
-        <button class="primary-btn full" onclick="login()">
-            Continue
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- BOOKING POPUP -->
-
-<div class="modal" id="bookingModal">
-
-    <div class="modal-content">
-
-        <button class="close" onclick="closeBooking()">×</button>
-
-        <div class="success-icon">✓</div>
-
-        <h2>Ride Requested!</h2>
-
-        <p id="bookingMessage">
-            Searching for nearby drivers...
-        </p>
-
-        <div class="driver-card">
-
-            <div class="driver-photo">👨🏻</div>
-
-            <div>
-                <h3>Raj Kumar</h3>
-                <p>⭐ 4.8 · Verified Driver</p>
-                <p>DL 01 AB 1234</p>
-            </div>
-
-        </div>
-
-        <button class="primary-btn full" onclick="closeBooking()">
-            Done
-        </button>
-
-    </div>
-
-</div>
+    if(target){
+        target.classList.add("active");
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+    }
+}
 
 
-<script src="script.js"></script>
+function openLogin(){
+    document.getElementById("loginModal")
+        .classList.add("show");
+}
 
-</body>
-</html>
+
+function closeLogin(){
+    document.getElementById("loginModal")
+        .classList.remove("show");
+}
+
+
+function openSignup(){
+    document.getElementById("signupModal")
+        .classList.add("show");
+}
+
+
+function closeSignup(){
+    document.getElementById("signupModal")
+        .classList.remove("show");
+}
+
+
+function loginAs(role){
+
+    closeLogin();
+
+    if(role === "passenger"){
+        showPage("passenger");
+        toast("Passenger login successful ✓");
+    }
+
+    if(role === "driver"){
+        showPage("driver");
+        toast("Driver login successful ✓");
+    }
+
+    if(role === "admin"){
+        showPage("admin");
+        toast("Admin login successful ✓");
+    }
+}
+
+
+function signup(){
+
+    const name =
+        document.getElementById("signupName").value;
+
+    if(!name){
+        toast("Please enter your name");
+        return;
+    }
+
+    closeSignup();
+
+    showPage("passenger");
+
+    toast(
+        "Account created successfully ✓"
+    );
+}
+
+
+function setPickup(location){
+
+    document.getElementById("pickup")
+        .value = location;
+
+    toast("Pickup set to " + location);
+}
+
+
+function getLocation(){
+
+    if(!navigator.geolocation){
+
+        toast("GPS is not supported");
+
+        return;
+    }
+
+    toast("Getting your location...");
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            const lat =
+                position.coords.latitude;
+
+            const lng =
+                position.coords.longitude;
+
+            document.getElementById("pickup")
+                .value =
+                lat.toFixed(5) +
+                ", " +
+                lng.toFixed(5);
+
+            toast("Current GPS location detected ✓");
+        },
+
+        function(){
+
+            toast(
+                "Location permission denied"
+            );
+        }
+    );
+}
+
+
+function findDrivers(){
+
+    toast(
+        "Searching nearby drivers..."
+    );
+
+    setTimeout(function(){
+
+        toast(
+            "2 nearby drivers found ✓"
+        );
+
+    },1000);
+}
+
+
+function requestRide(){
+
+    const pickup =
+        document.getElementById("pPickup").value;
+
+    const destination =
+        document.getElementById("pDestination").value;
+
+    if(!pickup || !destination){
+
+        toast(
+            "Enter pickup and destination"
+        );
+
+        return;
+    }
