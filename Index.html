@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSetu - One App For Every Journey</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        🛺 <span>Auto<span>Setu</span></span>
+    </div>
+
+    <nav id="navMenu">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#offers">Offers</a>
+        <a href="#safety">Safety</a>
+        <a href="#history">My Rides</a>
+    </nav>
+
+    <button class="login-btn" onclick="openLogin()">Login / Sign Up</button>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</header>
+
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+        <p class="small-title">INDIA'S LOCAL MOBILITY PLATFORM</p>
+
+        <h1>One App.<br>
+            <span>Every Journey.</span>
+        </h1>
+
+        <p>
+            Book bikes, autos, taxis, cabs, parcel delivery,
+            public transport and stays — all in one place.
+        </p>
+
+        <button class="primary-btn" onclick="scrollToServices()">
+            Book a Ride →
+        </button>
+    </div>
+
+
+    <div class="booking-card">
+
+        <h2>Where do you want to go?</h2>
+
+        <div class="location-box">
+            <span>📍</span>
+            <input id="pickup" type="text" placeholder="Pickup location">
+            <button onclick="getLocation()">GPS</button>
+        </div>
+
+        <div class="location-box">
+            <span>📌</span>
+            <input id="destination" type="text" placeholder="Where to?">
+        </div>
+
+        <div class="quick-location">
+            <button onclick="setLocation('Current Location')">
+                📍 Current Location
+            </button>
+            <button onclick="setLocation('University')">
+                🎓 University
+            </button>
+            <button onclick="setLocation('Bus Stand')">
+                🚌 Bus Stand
+            </button>
+        </div>
+
+        <button class="search-btn" onclick="searchRide()">
+            Search Rides
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="services">
+
+    <div class="section-heading">
+        <p>SERVICES</p>
+        <h2>Everything You Need to Travel</h2>
+    </div>
+
+    <div class="services-grid">
+
+        <div class="service-card active" onclick="selectService('Bike', 8)">
+            <div class="service-icon">🏍️</div>
+            <h3>Bike</h3>
+            <p>Fast & affordable</p>
+        </div>
+
+        <div class="service-card" onclick="selectService('Auto', 12)">
+            <div class="service-icon">🛺</div>
+            <h3>Auto</h3>
+            <p>Local rides</p>
+        </div>
+
+        <div class="service-card" onclick="selectService('Taxi', 15)">
+            <div class="service-icon">🚕</div>
+            <h3>Taxi</h3>
+            <p>Comfortable rides</p>
+        </div>
+
+        <div class="service-card" onclick="selectService('Cab', 18)">
+            <div class="service-icon">🚗</div>
+            <h3>Cab</h3>
+            <p>Premium travel</p>
+        </div>
+
+        <div class="service-card" onclick="selectService('Parcel', 20)">
+            <div class="service-icon">📦</div>
+            <h3>Parcel</h3>
+            <p>Send anything</p>
+        </div>
+
+        <div class="service-card" onclick="selectService('Metro', 5)">
+            <div class="service-icon">🚇</div>
+            <h3>Metro</h3>
+            <p>Metro routes</p>
+        </div>
+
+        <div class="service-card" onclick="selectService('Bus', 4)">
+            <div class="service-icon">🚌</div>
+            <h3>Bus</h3>
+            <p>City & intercity</p>
+        </div>
+
+        <div class="service-card" onclick="selectService('Carpool', 10)">
+            <div class="service-icon">👥</div>
+            <h3>Carpool</h3>
+            <p>Share your ride</p>
+        </div>
+
+        <div class="service-card" onclick="selectService('Stay', 1000)">
+            <div class="service-icon">🏨</div>
+            <h3>Stay</h3>
+            <p>Hotels & rooms</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="ride-section">
+
+    <div class="ride-panel">
+
+        <div>
+            <p class="small-title">QUICK BOOKING</p>
+            <h2 id="selectedTitle">Bike Ride</h2>
+            <p id="selectedText">
+                Find a nearby bike and reach your destination quickly.
+            </p>
+        </div>
+
+        <div class="fare-box">
+            <span>Estimated Fare</span>
+            <strong id="fare">₹80</strong>
+        </div>
+
+        <button class="primary-btn" onclick="bookRide()">
+            Book Now
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="offers">
+
+    <div class="section-heading">
+        <p>OFFERS</p>
+        <h2>Save More With AutoSetu</h2>
+    </div>
+
+    <div class="offers-grid">
+
+        <div class="offer-card">
+            <span>🎁</span>
+            <h3>NEW USER</h3>
+            <p>Get ₹50 OFF on your first ride.</p>
+            <button onclick="showOffer('FIRST50')">Use Offer</button>
+        </div>
+
+        <div class="offer-card">
+            <span>🏍️</span>
+            <h3>BIKE RIDES</h3>
+            <p>Save more on everyday travel.</p>
+            <button onclick="showOffer('BIKE20')">Use Offer</button>
+        </div>
+
+        <div class="offer-card">
+            <span>📦</span>
+            <h3>PARCEL</h3>
+            <p>Special delivery charges.</p>
+            <button onclick="showOffer('PARCEL10')">Use Offer</button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section safety" id="safety">
+
+    <div class="section-heading">
+        <p>SAFETY</p>
+        <h2>Your Safety Comes First</h2>
+    </div>
+
+    <div class="safety-grid">
+
+        <div>
+            <span>🛡️</span>
+            <h3>Verified Drivers</h3>
+            <p>Driver verification helps create a trusted network.</p>
+        </div>
+
+        <div>
+            <span>📍</span>
+            <h3>Trip Tracking</h3>
+            <p>Share your trip and track your journey.</p>
+        </div>
+
+        <div>
+            <span>🆘</span>
+            <h3>Emergency SOS</h3>
+            <p>Quick access to emergency assistance.</p>
+            <button class="sos-btn" onclick="sos()">SOS</button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="history">
+
+    <div class="section-heading">
+        <p>MY RIDES</p>
+        <h2>Ride History</h2>
+    </div>
+
+    <div id="historyList" class="history-list">
+        <p class="empty">No rides booked yet.</p>
+    </div>
+
+</section>
+
+
+<section class="download-section">
+
+    <div>
+        <p class="small-title">COMING SOON</p>
+        <h2>AutoSetu Mobile App</h2>
+        <p>Book rides, track drivers and manage your journeys from your phone.</p>
+    </div>
+
+    <div class="app-buttons">
+        <button>▶ Google Play</button>
+        <button> App Store</button>
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">🛺 AutoSetu</div>
+
+    <p>
+        One App For Every Journey
+    </p>
+
+    <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#safety">Safety</a>
+        <a href="#offers">Offers</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 AutoSetu. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- LOGIN POPUP -->
+
+<div class="modal" id="loginModal">
+
+    <div class="modal-content">
+
+        <button class="close" onclick="closeLogin()">×</button>
+
+        <h2>Welcome to AutoSetu</h2>
+        <p>Login or create your account.</p>
+
+        <input id="phone" type="tel" placeholder="Enter mobile number">
+
+        <button class="primary-btn full" onclick="login()">
+            Continue
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- BOOKING POPUP -->
+
+<div class="modal" id="bookingModal">
+
+    <div class="modal-content">
+
+        <button class="close" onclick="closeBooking()">×</button>
+
+        <div class="success-icon">✓</div>
+
+        <h2>Ride Requested!</h2>
+
+        <p id="bookingMessage">
+            Searching for nearby drivers...
+        </p>
+
+        <div class="driver-card">
+
+            <div class="driver-photo">👨🏻</div>
+
+            <div>
+                <h3>Raj Kumar</h3>
+                <p>⭐ 4.8 · Verified Driver</p>
+                <p>DL 01 AB 1234</p>
+            </div>
+
+        </div>
+
+        <button class="primary-btn full" onclick="closeBooking()">
+            Done
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
