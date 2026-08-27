@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSetu - Driver Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        header {
+            background: white;
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-right: auto;
+        }
+
+        .logo span {
+            color: #ff7200;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #172033;
+            margin-right: 15px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 30px 5%;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome small {
+            color: #ff7200;
+            font-weight: bold;
+        }
+
+        .welcome h1 {
+            margin: 8px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .photo {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: #fff0e3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .verified {
+            color: #079455;
+            font-weight: bold;
+        }
+
+        .online-box {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .status {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .online {
+            color: #079455;
+        }
+
+        .offline {
+            color: #d92d20;
+        }
+
+        .online-btn {
+            border: none;
+            padding: 16px 35px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #079455;
+            color: white;
+        }
+
+        .offline-btn {
+            background: #d92d20;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .stat {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .stat span {
+            color: #667085;
+        }
+
+        .request {
+            border: 2px solid #ffe0c2;
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .route {
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        .btn {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 4px;
+        }
+
+        .accept {
+            background: #079455;
+            color: white;
+        }
+
+        .reject {
+            background: #d92d20;
+            color: white;
+        }
+
+        .orange {
+            background: #ff7200;
+            color: white;
+        }
+
+        .blue {
+            background: #2563eb;
+            color: white;
+        }
+
+        .ride-status {
+            padding: 15px;
+            background: #fff7ed;
+            border-left: 5px solid #ff7200;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .verification {
+            line-height: 2;
+        }
+
+        .history-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .sos {
+            background: #d92d20;
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 15px auto;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        footer p {
+            color: #c7cbd3;
+            margin-top: 8px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #172033;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 100;
+        }
+
+        @media(max-width:800px) {
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width:500px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .profile {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🛺 Auto<span>Setu</span>
+    </div>
+
+    <a href="index.html" class="back">← Home</a>
+
+</header>
+
+
+<main class="container">
+
+    <div class="welcome">
+
+        <small>DRIVER DASHBOARD</small>
+
+        <h1>🚕 Welcome, Raj Kumar</h1>
+
+        <p>Manage your rides and availability from here.</p>
+
+    </div>
+
+
+    <!-- DRIVER PROFILE -->
+
+    <div class="card">
+
+        <div class="profile">
+
+            <div class="photo">👨🏻</div>
+
+            <div>
+
+                <h2>Raj Kumar</h2>
+
+                <p>⭐ 4.8 / 5</p>
+
+                <p class="verified">
+                    ✓ Verified Driver
+                </p>
+
+                <p>Auto Driver · PB-07-AB-1234</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ONLINE OFFLINE -->
+
+    <div class="card online-box">
+
+        <div id="status" class="status offline">
+            🔴 You are OFFLINE
+        </div>
+
+        <p style="margin-bottom:18px;">
+            Go online to receive nearby ride requests.
+        </p>
+
+        <button
+            id="onlineButton"
+            class="online-btn"
+            onclick="toggleOnline()">
+
+            GO ONLINE
+
+        </button>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>128</strong>
+            <span>🚕 Rides Completed</span>
+        </div>
+
+        <div class="stat">
+            <strong>4.8</strong>
+            <span>⭐ Rating</span>
+        </div>
+
+        <div class="stat">
+            <strong>92%</strong>
+            <span>✅ Acceptance Rate</span>
+        </div>
+
+        <div class="stat">
+            <strong>4%</strong>
+            <span>❌ Cancellation Rate</span>
+        </div>
+
+    </div>
+
+
+    <!-- LOCATION -->
+
+    <div class="card">
+
+        <h2>📍 Current Location</h2>
+
+        <p id="locationText" style="margin:12px 0;">
+            Location not shared
+        </p>
+
+        <button class="btn orange" onclick="shareLocation()">
+            📍 Share Current Location
+        </button>
+
+    </div>
+
+
+    <!-- RIDE REQUEST -->
+
+    <div class="card">
+
+        <h2>🔔 New Ride Request</h2>
+
+        <div class="request">
+
+            <h3>Passenger: Sakina</h3>
+
+            <div class="route">
+
+                📍 <b>Pickup:</b>
+                University Gate
+
+                <br>
+
+                📌 <b>Destination:</b>
+                Main Bus Stand
+
+                <br>
+
+                📏 Distance:
+                4.2 km
+
+                <br>
+
+                💰 Suggested Fare:
+                ₹80
+
+            </div>
+
+            <button
+                class="btn accept"
+                onclick="acceptRide()">
+
+                ✓ ACCEPT
+
+            </button>
+
+            <button
+                class="btn reject"
+                onclick="rejectRide()">
+
+                ✕ REJECT
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVE RIDE -->
+
+    <div class="card">
+
+        <h2>🚕 Active Ride</h2>
+
+        <div id="activeRide">
+
+            <p>
+                No active ride right now.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- VERIFICATION -->
+
+    <div class="card">
+
+        <h2>🪪 Driver & Vehicle Verification</h2>
+
+        <div class="verification">
+
+            <p>
+                Identity:
+                <span class="verified">✓ Verified</span>
+            </p>
+
+            <p>
+                Driving License:
+                <span class="verified">✓ Verified</span>
+            </p>
+
+            <p>
+                Vehicle Registration:
+                <span class="verified">✓ Verified</span>
+            </p>
+
+            <p>
+                Insurance:
+                <span class="verified">✓ Valid</span>
+            </p>
+
+            <p>
+                Vehicle:
+                Auto Rickshaw
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIDE HISTORY -->
+
+    <div class="card">
+
+        <h2>📜 Ride History</h2>
+
+        <div class="history-item">
+            <b>AS-10021</b>
+            <p>University → Bus Stand</p>
+            <p>₹80 · Completed · ⭐ 5</p>
+        </div>
+
+        <div class="history-item">
+            <b>AS-10018</b>
+            <p>Market → Railway Station</p>
+            <p>₹120 · Completed · ⭐ 4</p>
+        </div>
+
+        <div class="history-item">
+            <b>AS-10012</b>
+            <p>College → City Hospital</p>
+            <p>₹100 · Completed · ⭐ 5</p>
+        </div>
+
+    </div>
+
+
+    <!-- SAFETY -->
+
+    <div class="card" style="text-align:center;">
+
+        <h2>🚨 Driver Safety</h2>
+
+        <p style="margin-top:10px;">
+            Use SOS only for a genuine emergency.
+        </p>
+
+        <button class="sos" onclick="sos()">
+            SOS
+        </button>
+
+        <button
+            class="btn blue"
+            onclick="reportIssue()">
+
+            Report Safety Issue
+
+        </button>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <h2>🛺 AutoSetu</h2>
+
+    <p>Driver Partner Platform</p>
+
+    <p>© 2026 AutoSetu. All Rights Reserved.</p>
+
+</footer>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+let isOnline = false;
+let rideAccepted = false;
+
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.style.display = "block";
+
+    setTimeout(function() {
+
+        toast.style.display = "none";
+
+    }, 3000);
+}
+
+
+function toggleOnline() {
+
+    isOnline = !isOnline;
+
+    const status =
+        document.getElementById("status");
+
+    const button =
+        document.getElementById("onlineButton");
+
+    if (isOnline) {
+
+        status.innerHTML =
+            "🟢 You are ONLINE";
+
+        status.className =
+            "status online";
+
+        button.innerText =
+            "GO OFFLINE";
+
+        button.classList.add("offline-btn");
+
+        showToast(
+            "You are now online. Ride requests enabled."
+        );
+
+    } else {
+
+        status.innerHTML =
+            "🔴 You are OFFLINE";
+
+        status.className =
+            "status offline";
+
+        button.innerText =
+            "GO ONLINE";
+
+        button.classList.remove("offline-btn");
+
+        showToast(
+            "You are now offline."
+        );
+    }
+}
+
+
+function shareLocation() {
+
+    const locationText =
+        document.getElementById("locationText");
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(
+
+            function(position) {
+
+                const lat =
+                    position.coords.latitude;
+
+                const lon =
+                    position.coords.longitude;
+
+                locationText.innerHTML =
+                    "📍 Location shared<br>" +
+                    "Latitude: " + lat.toFixed(5) +
+                    "<br>Longitude: " + lon.toFixed(5);
+
+                showToast(
+                    "Current location shared ✓"
+                );
+            },
+
+            function() {
+
+                locationText.innerText =
+                    "Location permission was not available.";
+
+                showToast(
+                    "Please allow location permission."
+                );
+            }
+
+        );
+
+    } else {
+
+        showToast(
+            "GPS is not supported by this browser."
+        );
+    }
+}
+
+
+function acceptRide() {
+
+    if (!isOnline) {
+
+        showToast(
+            "Please GO ONLINE before accepting rides."
+        );
+
+        return;
+    }
+
+    rideAccepted = true;
+
+    document.getElementById("activeRide").innerHTML = `
+
+        <div class="ride-status">
+
+            <h3>🚕 Ride Accepted</h3>
+
+            <p style="margin-top:10px;">
+                Passenger: <b>Sakina</b>
+            </p>
+
+            <p>
+                📍 Pickup: University Gate
+            </p>
+
+            <p>
+                📌 Destination: Main Bus Stand
+            </p>
+
+            <p>
+                💰 Fare: ₹80
+            </p>
+
+            <br>
+
+            <button
+                class="btn orange"
+                onclick="arrived()">
+
+                📍 MARK ARRIVED
+
+            </button>
+
+        </div>
+    `;
+
+    showToast(
+        "Ride accepted successfully ✓"
+    );
+}
+
+
+function arrived() {
+
+    document.getElementById("activeRide").innerHTML = `
+
+        <div class="ride-status">
+
+            <h3>📍 Driver Arrived</h3>
+
+            <p style="margin:10px 0;">
+                You have reached the pickup location.
+            </p>
+
+            <button
+                class="btn blue"
+                onclick="startRide()">
+
+                🚕 START RIDE
+
+            </button>
+
+        </div>
+    `;
+
+    showToast(
+        "Marked as arrived."
+    );
+}
+
+
+function startRide() {
+
+    document.getElementById("activeRide").innerHTML = `
+
+        <div class="ride-status">
+
+            <h3>🚕 Ride Started</h3>
+
+            <p style="margin:10px 0;">
+                Live trip tracking is active.
+            </p>
+
+            <p>
+                📍 University Gate
+                → Main Bus Stand
+            </p>
+
+            <button
+                class="btn accept"
+                onclick="completeRide()">
+
+                🏁 COMPLETE RIDE
+
+            </button>
+
+        </div>
+    `;
+
+    showToast(
+        "Ride started."
+    );
+}
+
+
+function completeRide() {
+
+    document.getElementById("activeRide").innerHTML = `
+
+        <div class="ride-status">
+
+            <h3>🏁 Ride Completed</h3>
+
+            <p style="margin:10px 0;">
+                Fare collected: <b>₹80</b>
+            </p>
+
+            <p>
+                ⭐ Passenger can now rate the ride.
+            </p>
+
+        </div>
+    `;
+
+    showToast(
+        "Ride completed successfully ✓"
+    );
+}
+
+
+function rejectRide() {
+
+    showToast(
+        "Ride request rejected."
+    );
+}
+
+
+function sos() {
+
+    const confirmSOS =
+        confirm(
+            "Are you sure this is an emergency?"
+        );
+
+    if (confirmSOS) {
+
+        showToast(
+            "🚨 SOS alert triggered. Emergency support requested."
+        );
+
+    }
+}
+
+
+function reportIssue() {
+
+    const issue =
+        prompt(
+            "Describe the safety issue:"
+        );
+
+    if (issue) {
+
+        showToast(
+            "Safety report submitted ✓"
+        );
+    }
+}
+
+</script>
+
+</body>
+</html>
