@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSetu - Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff7ed, #f5f7fb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .logo span {
+            color: #ff7200;
+        }
+
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+            color: #172033;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #667085;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #344054;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d0d5dd;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            border-color: #ff7200;
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 55px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .login-btn {
+            width: 100%;
+            border: none;
+            background: #ff7200;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            opacity: .9;
+        }
+
+        .forgot {
+            display: block;
+            text-align: right;
+            margin-top: -8px;
+            margin-bottom: 18px;
+            color: #ff7200;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 22px 0;
+            color: #98a2b3;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            background: #e4e7ec;
+            flex: 1;
+        }
+
+        .signup {
+            text-align: center;
+            color: #667085;
+        }
+
+        .signup a {
+            color: #ff7200;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #344054;
+            text-decoration: none;
+        }
+
+        .demo {
+            margin-top: 20px;
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #475467;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #172033;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        @media(max-width:450px) {
+            .card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="logo">
+        🛺 Auto<span>Setu</span>
+    </div>
+
+    <div class="card">
+
+        <h1>Welcome Back 👋</h1>
+
+        <p class="subtitle">
+            Login to continue with AutoSetu
+        </p>
+
+
+        <form onsubmit="loginUser(event)">
+
+            <label>Email or Mobile Number</label>
+
+            <input
+                id="userId"
+                type="text"
+                placeholder="Enter email or mobile number"
+                required
+            >
+
+
+            <label>Password</label>
+
+            <div class="password-box">
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Enter password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="show-password"
+                    onclick="togglePassword()">
+
+                    👁️
+
+                </button>
+
+            </div>
+
+
+            <span
+                class="forgot"
+                onclick="forgotPassword()">
+
+                Forgot Password?
+
+            </span>
+
+
+            <label>Login As</label>
+
+            <select id="role">
+
+                <option value="passenger">
+                    👤 Passenger
+                </option>
+
+                <option value="driver">
+                    🚕 Driver
+                </option>
+
+                <option value="admin">
+                    👨‍💼 Admin
+                </option>
+
+            </select>
+
+
+            <button
+                type="submit"
+                class="login-btn">
+
+                🔐 Login
+
+            </button>
+
+        </form>
+
+
+        <div class="divider">
+            OR
+        </div>
+
+
+        <div class="signup">
+
+            Don't have an account?
+
+            <a href="signup.html">
+                Create Account
+            </a>
+
+        </div>
+
+
+        <div class="demo">
+
+            <b>🎓 College Demo Login</b>
+
+            <br>
+
+            Passenger:
+            any email + password
+
+            <br>
+
+            Driver:
+            select Driver
+
+            <br>
+
+            Admin:
+            select Admin
+
+            <br><br>
+
+            <small>
+                This is a frontend prototype. Real authentication
+                requires a secure backend/database.
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <a href="index.html" class="home">
+        ← Back to AutoSetu Home
+    </a>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.style.display = "block";
+
+    setTimeout(function() {
+
+        toast.style.display = "none";
+
+    }, 3000);
+}
+
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+    } else {
+
+        password.type = "password";
+
+    }
+}
+
+
+function loginUser(event) {
+
+    event.preventDefault();
+
+    const userId =
+        document.getElementById("userId").value.trim();
+
+    const password =
+        document.getElementById("password").value.trim();
+
+    const role =
+        document.getElementById("role").value;
+
+
+    if (!userId || !password) {
+
+        showToast(
+            "Please enter your login details."
+        );
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "autosetuUser",
+        userId
+    );
+
+    localStorage.setItem(
+        "autosetuRole",
+        role
+    );
+
+
+    showToast(
+        "Login successful ✓"
+    );
+
+
+    setTimeout(function() {
+
+        if (role === "admin") {
+
+            window.location.href =
+                "admin.html";
+
+        }
+
+        else if (role === "driver") {
+
+            window.location.href =
+                "driver.html";
+
+        }
+
+        else {
+
+            window.location.href =
+                "passenger.html";
+
+        }
+
+    }, 700);
+}
+
+
+function forgotPassword() {
+
+    const email =
+        prompt(
+            "Enter your email or mobile number:"
+        );
+
+    if (email) {
+
+        showToast(
+            "Password reset request submitted."
+        );
+
+    }
+}
+
+</script>
+
+</body>
+</html>
