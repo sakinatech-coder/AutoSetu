@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AutoSetu - Passenger</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#243b64;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#ffffff;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.10);
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#f59e0b;
+}
+
+.nav-buttons button{
+    border:none;
+    padding:9px 15px;
+    margin-left:6px;
+    border-radius:7px;
+    cursor:pointer;
+    background:#243b64;
+    color:white;
+}
+
+.nav-buttons button:hover{
+    background:#f59e0b;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:40px 20px 25px;
+}
+
+.hero h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#777;
+    font-size:17px;
+}
+
+/* BOOKING */
+.booking{
+    width:90%;
+    max-width:850px;
+    margin:20px auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 20px rgba(0,0,0,.10);
+}
+
+.booking h2{
+    margin-bottom:20px;
+}
+
+.form-row{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.form-group{
+    flex:1;
+    min-width:220px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#f59e0b;
+}
+
+.book-btn{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    background:#f59e0b;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.book-btn:hover{
+    background:#d97706;
+}
+
+/* CARDS */
+.services{
+    width:90%;
+    max-width:1000px;
+    margin:35px auto;
+}
+
+.services h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+
+.card .icon{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.card h3{
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#777;
+}
+
+/* RIDE STATUS */
+.status{
+    width:90%;
+    max-width:850px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+    display:none;
+}
+
+.status h2{
+    margin-bottom:15px;
+}
+
+.status p{
+    margin:8px 0;
+}
+
+/* RIDE HISTORY */
+.history{
+    width:90%;
+    max-width:850px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+
+.history-item{
+    padding:15px;
+    border-bottom:1px solid #eee;
+}
+
+.history-item:last-child{
+    border-bottom:none;
+}
+
+/* FOOTER */
+footer{
+    margin-top:50px;
+    padding:25px;
+    background:#243b64;
+    color:white;
+    text-align:center;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .navbar{
+        padding:12px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .nav-buttons button{
+        padding:7px 9px;
+        font-size:12px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+    .booking{
+        width:94%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+    <div class="logo">
+        Auto<span>Setu</span>
+    </div>
+
+    <div class="nav-buttons">
+        <button onclick="showProfile()">👤 Profile</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <h1>Welcome Passenger 👋</h1>
+
+    <p>
+        Book an auto quickly and travel safely with AutoSetu.
+    </p>
+
+</section>
+
+
+<!-- BOOK RIDE -->
+<section class="booking">
+
+    <h2>🚕 Book Your Ride</h2>
+
+    <form onsubmit="bookRide(event)">
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label>Pickup Location</label>
+
+                <input
+                    type="text"
+                    id="pickup"
+                    placeholder="Enter pickup location"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Destination</label>
+
+                <input
+                    type="text"
+                    id="destination"
+                    placeholder="Enter destination"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label>Ride Type</label>
+
+                <select id="rideType" required>
+
+                    <option value="">Select Ride</option>
+
+                    <option value="Auto">🛺 Auto Rickshaw</option>
+
+                    <option value="Bike">🏍️ Bike</option>
+
+                    <option value="Car">🚗 Car</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Payment Method</label>
+
+                <select id="payment" required>
+
+                    <option value="">Select Payment</option>
+
+                    <option value="Cash">💵 Cash</option>
+
+                    <option value="UPI">📱 UPI</option>
+
+                    <option value="Card">💳 Card</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <button class="book-btn" type="submit">
+            🚕 Book Now
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- SERVICES -->
+<section class="services">
+
+    <h2>Our Services</h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="icon">🛺</div>
+
+            <h3>Auto Ride</h3>
+
+            <p>Fast and affordable local auto rides.</p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🏍️</div>
+
+            <h3>Bike Ride</h3>
+
+            <p>Quick travel for short distances.</p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🚗</div>
+
+            <h3>Car Ride</h3>
+
+            <p>Comfortable rides for passengers.</p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🛣️</div>
+
+            <h3>Carpool</h3>
+
+            <p>Share your journey and save money.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RIDE STATUS -->
+<section class="status" id="rideStatus">
+
+    <h2>🚕 Current Ride</h2>
+
+    <p id="rideDetails"></p>
+
+    <p>
+        <strong>Status:</strong>
+        <span id="rideState">Searching for driver...</span>
+    </p>
+
+    <button
+        onclick="cancelRide()"
+        style="margin-top:15px;padding:10px 18px;border:none;border-radius:7px;background:#dc3545;color:white;cursor:pointer;">
+        Cancel Ride
+    </button>
+
+</section>
+
+
+<!-- HISTORY -->
+<section class="history">
+
+    <h2>📋 Ride History</h2>
+
+    <div id="historyList">
+
+        <p style="color:#777;margin-top:15px;">
+            No rides booked yet.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>© 2026 AutoSetu | Smart Hyperlocal Mobility Platform</p>
+
+</footer>
+
+
+<script>
+
+/* BOOK RIDE */
+
+function bookRide(event){
+
+    event.preventDefault();
+
+    const pickup =
+        document.getElementById("pickup").value.trim();
+
+    const destination =
+        document.getElementById("destination").value.trim();
+
+    const rideType =
+        document.getElementById("rideType").value;
+
+    const payment =
+        document.getElementById("payment").value;
+
+
+    if(!pickup || !destination || !rideType || !payment){
+
+        alert("Please fill all details.");
+
+        return;
+    }
+
+
+    const ride = {
+
+        pickup: pickup,
+
+        destination: destination,
+
+        rideType: rideType,
+
+        payment: payment,
+
+        status: "Searching for driver...",
+
+        date: new Date().toLocaleString()
+
+    };
+
+
+    localStorage.setItem(
+        "currentRide",
+        JSON.stringify(ride)
+    );
+
+
+    let history =
+        JSON.parse(
+            localStorage.getItem("rideHistory")
+        ) || [];
+
+
+    history.push(ride);
+
+
+    localStorage.setItem(
+        "rideHistory",
+        JSON.stringify(history)
+    );
+
+
+    displayRide(ride);
+
+    loadHistory();
+
+
+    alert(
+        "Ride booked successfully! Searching for a driver."
+    );
+
+}
+
+
+/* DISPLAY CURRENT RIDE */
+
+function displayRide(ride){
+
+    const statusBox =
+        document.getElementById("rideStatus");
+
+    statusBox.style.display = "block";
+
+
+    document.getElementById("rideDetails").innerHTML =
+        "<strong>Pickup:</strong> " + ride.pickup +
+        "<br><strong>Destination:</strong> " + ride.destination +
+        "<br><strong>Ride:</strong> " + ride.rideType +
+        "<br><strong>Payment:</strong> " + ride.payment;
+
+
+    document.getElementById("rideState").innerText =
+        ride.status;
+}
+
+
+/* CANCEL RIDE */
+
+function cancelRide(){
+
+    localStorage.removeItem("currentRide");
+
+    document.getElementById("rideStatus").style.display =
+        "none";
+
+    alert("Ride cancelled successfully.");
+}
+
+
+/* RIDE HISTORY */
+
+function loadHistory(){
+
+    const historyList =
+        document.getElementById("historyList");
+
+
+    const history =
+        JSON.parse(
+            localStorage.getItem("rideHistory")
+        ) || [];
+
+
+    if(history.length === 0){
+
+        historyList.innerHTML =
+            '<p style="color:#777;margin-top:15px;">No rides booked yet.</p>';
+
+        return;
+    }
+
+
+    historyList.innerHTML = "";
+
+
+    history.reverse().forEach(function(ride){
+
+        const div =
+            document.createElement("div");
+
+        div.className = "history-item";
+
+
+        div.innerHTML =
+            "<strong>" +
+            ride.rideType +
+            "</strong><br>" +
+
+            "📍 " +
+            ride.pickup +
+            " → " +
+            ride.destination +
+
+            "<br>💳 Payment: " +
+            ride.payment +
+
+            "<br>📅 " +
+            ride.date;
+
+
+        historyList.appendChild(div);
+
+    });
+
+}
+
+
+/* PROFILE */
+
+function showProfile(){
+
+    const email =
+        localStorage.getItem("autosetuEmail");
+
+    alert(
+        "Passenger Profile\n\nEmail: " +
+        (email || "Not available")
+    );
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+    localStorage.removeItem("autosetuEmail");
+
+    localStorage.removeItem("autosetuRole");
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* LOAD SAVED RIDE */
+
+window.onload = function(){
+
+    const currentRide =
+        localStorage.getItem("currentRide");
+
+
+    if(currentRide){
+
+        displayRide(
+            JSON.parse(currentRide)
+        );
+
+    }
+
+
+    loadHistory();
+
+};
+
+</script>
+
+</body>
+  </html>
