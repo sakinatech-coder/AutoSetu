@@ -1,642 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoSetu - Carpool</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoSetu - Carpool</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-        body {
-            background: #f5f7fb;
-            color: #172033;
-        }
+body{
+    background:#f5f7fb;
+    color:#243b64;
+}
 
-        header {
-            background: white;
-            padding: 16px 5%;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 12px rgba(0,0,0,.08);
-        }
+.navbar{
+    background:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
 
-        .logo {
-            font-size: 25px;
-            font-weight: bold;
-            margin-right: auto;
-        }
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
 
-        .logo span {
-            color: #ff7200;
-        }
+.logo span{
+    color:#f59e0b;
+}
 
-        .back {
-            text-decoration: none;
-            color: #172033;
-            margin-right: 15px;
-        }
+.navbar button{
+    border:0;
+    background:#243b64;
+    color:white;
+    padding:9px 15px;
+    border-radius:7px;
+    cursor:pointer;
+}
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 35px 5%;
-        }
+.navbar button:hover{
+    background:#f59e0b;
+}
 
-        .heading {
-            margin-bottom: 25px;
-        }
+.hero{
+    text-align:center;
+    padding:40px 20px 25px;
+}
 
-        .heading small {
-            color: #ff7200;
-            font-weight: bold;
-        }
+.hero h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
 
-        .heading h1 {
-            margin: 8px 0;
-        }
+.hero p{
+    color:#777;
+}
 
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+.container{
+    width:92%;
+    max-width:1000px;
+    margin:20px auto;
+}
 
-        .tab {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            background: #e9edf3;
-            font-weight: bold;
-        }
+.box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:25px;
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
 
-        .tab.active {
-            background: #ff7200;
-            color: white;
-        }
+.box h2{
+    margin-bottom:20px;
+}
 
-        .card {
-            background: white;
-            padding: 22px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,.05);
-        }
+.form-row{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+.form-group{
+    flex:1;
+    min-width:220px;
+}
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
 
-        input, select {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #d0d5dd;
-            border-radius: 9px;
-            outline: none;
-        }
+input,select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+}
 
-        input:focus, select:focus {
-            border-color: #ff7200;
-        }
+input:focus,select:focus{
+    border-color:#f59e0b;
+}
 
-        .btn {
-            border: none;
-            padding: 12px 20px;
-            border-radius: 9px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 15px;
-        }
+.primary-btn{
+    width:100%;
+    margin-top:20px;
+    padding:13px;
+    border:0;
+    border-radius:8px;
+    background:#f59e0b;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-        .orange {
-            background: #ff7200;
-            color: white;
-        }
+.primary-btn:hover{
+    background:#d97706;
+}
 
-        .green {
-            background: #079455;
-            color: white;
-        }
+.pool-card{
+    border:1px solid #eee;
+    border-radius:10px;
+    padding:18px;
+    margin-bottom:15px;
+    background:#fafafa;
+}
 
-        .red {
-            background: #d92d20;
-            color: white;
-        }
+.pool-card h3{
+    margin-bottom:10px;
+}
 
-        .blue {
-            background: #2563eb;
-            color: white;
-        }
+.pool-card p{
+    margin:7px 0;
+    color:#555;
+}
 
-        .carpool-list {
-            display: grid;
-            gap: 15px;
-        }
+.join-btn{
+    margin-top:10px;
+    padding:10px 17px;
+    border:0;
+    border-radius:7px;
+    background:#198754;
+    color:white;
+    cursor:pointer;
+}
 
-        .carpool-item {
-            border: 1px solid #e4e7ec;
-            border-radius: 12px;
-            padding: 18px;
-        }
+.join-btn:hover{
+    background:#146c43;
+}
 
-        .driver {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+#message{
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+}
 
-        .photo {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: #fff0e3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-        }
+footer{
+    margin-top:50px;
+    padding:25px;
+    background:#243b64;
+    color:white;
+    text-align:center;
+}
 
-        .route {
-            margin: 15px 0;
-            line-height: 1.9;
-        }
+@media(max-width:600px){
 
-        .info {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+    .navbar{
+        padding:12px;
+    }
 
-        .badge {
-            padding: 6px 10px;
-            background: #f2f4f7;
-            border-radius: 20px;
-            font-size: 13px;
-        }
+    .logo{
+        font-size:22px;
+    }
 
-        .match {
-            color: #079455;
-            font-weight: bold;
-        }
-
-        .empty {
-            text-align: center;
-            color: #667085;
-            padding: 25px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        footer {
-            background: #111827;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            margin-top: 30px;
-        }
-
-        footer p {
-            color: #c7cbd3;
-            margin-top: 8px;
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #172033;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            display: none;
-            z-index: 100;
-        }
-
-        @media(max-width:700px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tabs {
-                flex-direction: column;
-            }
-        }
-    </style>
+    .hero h1{
+        font-size:27px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<header>
+<nav class="navbar">
 
     <div class="logo">
-        🚗 Auto<span>Setu</span>
+        Auto<span>Setu</span>
     </div>
 
-    <a href="index.html" class="back">
-        ← Home
-    </a>
+    <button onclick="goHome()">
+        Home
+    </button>
 
-</header>
+</nav>
+
+
+<section class="hero">
+
+    <h1>🚗 AutoSetu Carpool</h1>
+
+    <p>
+        Share your journey, meet nearby travellers and save money.
+    </p>
+
+</section>
 
 
 <main class="container">
 
-    <div class="heading">
-
-        <small>SMART CARPOOL</small>
-
-        <h1>🚗 Share Your Journey</h1>
-
-        <p style="margin-top:8px;color:#667085;">
-            Find people travelling on a similar route and share the cost.
-        </p>
-
-    </div>
-
-
-    <!-- TABS -->
-
-    <div class="tabs">
-
-        <button
-            id="searchTab"
-            class="tab active"
-            onclick="showSearch()">
-
-            🔎 Find Carpool
-
-        </button>
-
-        <button
-            id="createTab"
-            class="tab"
-            onclick="showCreate()">
-
-            🚗 Create Carpool
-
-        </button>
-
-    </div>
-
-
-    <!-- SEARCH CARPOOL -->
-
-    <section id="searchSection">
-
-        <div class="card">
-
-            <h2>🔎 Search Available Carpools</h2>
-
-            <div class="form-grid" style="margin-top:18px;">
-
-                <div>
-
-                    <label>Starting Location</label>
-
-                    <input
-                        id="searchFrom"
-                        type="text"
-                        placeholder="e.g. Chandigarh">
-
-                </div>
-
-                <div>
-
-                    <label>Destination</label>
-
-                    <input
-                        id="searchTo"
-                        type="text"
-                        placeholder="e.g. Delhi">
-
-                </div>
-
-                <div>
-
-                    <label>Date</label>
-
-                    <input
-                        id="searchDate"
-                        type="date">
-
-                </div>
-
-                <div>
-
-                    <label>Time</label>
-
-                    <input
-                        id="searchTime"
-                        type="time">
-
-                </div>
-
-            </div>
-
-            <button
-                class="btn orange"
-                onclick="searchCarpool()">
-
-                🔎 Search Carpools
-
-            </button>
-
-        </div>
-
-
-        <!-- AI MATCH -->
-
-        <div class="card">
-
-            <h2>🤖 AI Carpool Matching</h2>
-
-            <p style="margin-top:8px;color:#667085;">
-                AutoSetu compares route, time and available seats
-                to find suitable carpools.
-            </p>
-
-            <div id="aiResult" style="margin-top:18px;">
-
-                <div class="empty">
-                    Enter your route and search to see AI matches.
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- AVAILABLE CARPOOLS -->
-
-        <div class="card">
-
-            <h2>🚗 Available Carpools</h2>
-
-            <div id="carpoolList" class="carpool-list">
-
-                <div class="carpool-item">
-
-                    <div class="driver">
-
-                        <div class="photo">👨🏻</div>
-
-                        <div>
-                            <h3>Aman Kumar</h3>
-                            <p>⭐ 4.9 · Verified Driver</p>
-                        </div>
-
-                    </div>
-
-                    <div class="route">
-
-                        📍 <b>Chandigarh</b>
-                        → 📌 <b>Delhi</b>
-
-                        <br>
-
-                        📅 28 August 2026
-
-                        <br>
-
-                        🕗 8:00 AM
-
-                    </div>
-
-                    <div class="info">
-
-                        <span class="badge">
-                            💺 2 Seats Available
-                        </span>
-
-                        <span class="badge">
-                            🚗 Sedan
-                        </span>
-
-                        <span class="badge">
-                            💰 ₹450 contribution
-                        </span>
-
-                        <span class="badge match">
-                            🤖 96% Match
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="btn green"
-                        onclick="requestSeat('Aman Kumar')">
-
-                        Request Seat
-
-                    </button>
-
-                </div>
-
-
-                <div class="carpool-item">
-
-                    <div class="driver">
-
-                        <div class="photo">👨🏽</div>
-
-                        <div>
-                            <h3>Rahul Singh</h3>
-                            <p>⭐ 4.7 · Verified Driver</p>
-                        </div>
-
-                    </div>
-
-                    <div class="route">
-
-                        📍 <b>Chandigarh</b>
-                        → 📌 <b>Delhi</b>
-
-                        <br>
-
-                        📅 28 August 2026
-
-                        <br>
-
-                        🕣 8:30 AM
-
-                    </div>
-
-                    <div class="info">
-
-                        <span class="badge">
-                            💺 3 Seats Available
-                        </span>
-
-                        <span class="badge">
-                            🚗 Hatchback
-                        </span>
-
-                        <span class="badge">
-                            💰 ₹400 contribution
-                        </span>
-
-                        <span class="badge match">
-                            🤖 89% Match
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="btn green"
-                        onclick="requestSeat('Rahul Singh')">
-
-                        Request Seat
-
-                    </button>
-
-                </div>
-
-
-                <div class="carpool-item">
-
-                    <div class="driver">
-
-                        <div class="photo">👩🏻</div>
-
-                        <div>
-                            <h3>Neha Sharma</h3>
-                            <p>⭐ 4.8 · Verified Driver</p>
-                        </div>
-
-                    </div>
-
-                    <div class="route">
-
-                        📍 <b>Chandigarh</b>
-                        → 📌 <b>Delhi</b>
-
-                        <br>
-
-                        📅 28 August 2026
-
-                        <br>
-
-                        🕘 9:00 AM
-
-                    </div>
-
-                    <div class="info">
-
-                        <span class="badge">
-                            💺 1 Seat Available
-                        </span>
-
-                        <span class="badge">
-                            🚗 SUV
-                        </span>
-
-                        <span class="badge">
-                            💰 ₹500 contribution
-                        </span>
-
-                        <span class="badge match">
-                            🤖 81% Match
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="btn green"
-                        onclick="requestSeat('Neha Sharma')">
-
-                        Request Seat
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
     <!-- CREATE CARPOOL -->
 
-    <section id="createSection" class="hidden">
+    <section class="box">
 
-        <div class="card">
+        <h2>➕ Create a Carpool</h2>
 
-            <h2>🚗 Create Carpool Listing</h2>
+        <form onsubmit="createPool(event)">
 
-            <p style="margin-top:8px;color:#667085;">
-                List an already-planned journey and share eligible
-                travel costs with passengers.
-            </p>
+            <div class="form-row">
 
-            <div class="form-grid" style="margin-top:20px;">
+                <div class="form-group">
 
-                <div>
-
-                    <label>Starting Location</label>
+                    <label>Your Name</label>
 
                     <input
-                        id="createFrom"
                         type="text"
-                        placeholder="e.g. Chandigarh">
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                    >
 
                 </div>
 
-                <div>
+                <div class="form-group">
 
-                    <label>Destination</label>
+                    <label>Vehicle</label>
 
-                    <input
-                        id="createTo"
-                        type="text"
-                        placeholder="e.g. Delhi">
+                    <select id="vehicle" required>
+
+                        <option value="">
+                            Select vehicle
+                        </option>
+
+                        <option value="Car">
+                            🚗 Car
+                        </option>
+
+                        <option value="Bike">
+                            🏍️ Bike
+                        </option>
+
+                    </select>
 
                 </div>
 
-                <div>
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>From</label>
+
+                    <input
+                        type="text"
+                        id="from"
+                        placeholder="Starting location"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>To</label>
+
+                    <input
+                        type="text"
+                        id="to"
+                        placeholder="Destination"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
 
                     <label>Date</label>
 
                     <input
-                        id="createDate"
-                        type="date">
+                        type="date"
+                        id="date"
+                        required
+                    >
 
                 </div>
 
-                <div>
-
-                    <label>Departure Time</label>
-
-                    <input
-                        id="createTime"
-                        type="time">
-
-                </div>
-
-                <div>
+                <div class="form-group">
 
                     <label>Available Seats</label>
 
-                    <select id="seats">
+                    <select id="seats" required>
 
-                        <option value="">Select Seats</option>
+                        <option value="">
+                            Select seats
+                        </option>
+
                         <option value="1">1 Seat</option>
                         <option value="2">2 Seats</option>
                         <option value="3">3 Seats</option>
@@ -646,57 +329,74 @@
 
                 </div>
 
-                <div>
+            </div>
 
-                    <label>Vehicle Type</label>
 
-                    <select id="vehicle">
+            <button class="primary-btn" type="submit">
+                🚗 Create Carpool
+            </button>
 
-                        <option value="">Select Vehicle</option>
-                        <option>Sedan</option>
-                        <option>Hatchback</option>
-                        <option>SUV</option>
-                        <option>MPV</option>
+        </form>
 
-                    </select>
+        <p id="message"></p>
 
-                </div>
+    </section>
 
-                <div>
 
-                    <label>Suggested Cost Contribution</label>
+    <!-- AVAILABLE CARPOOLS -->
 
-                    <input
-                        id="cost"
-                        type="number"
-                        placeholder="₹ Amount">
+    <section class="box">
 
-                </div>
+        <h2>🔎 Available Carpools</h2>
+
+        <div id="poolList">
+
+            <div class="pool-card">
+
+                <h3>🚗 Raj Kumar</h3>
+
+                <p>
+                    📍 Mahilpur → Hoshiarpur
+                </p>
+
+                <p>
+                    📅 Today
+                </p>
+
+                <p>
+                    💺 2 seats available
+                </p>
+
+                <button
+                    class="join-btn"
+                    onclick="joinPool(this)">
+                    Join Carpool
+                </button>
 
             </div>
 
-            <button
-                class="btn orange"
-                onclick="createCarpool()">
 
-                🚗 Publish Carpool
+            <div class="pool-card">
 
-            </button>
+                <h3>🏍️ Aman Singh</h3>
 
-        </div>
+                <p>
+                    📍 Garhshankar → Hoshiarpur
+                </p>
 
+                <p>
+                    📅 Tomorrow
+                </p>
 
-        <!-- MY LISTING -->
+                <p>
+                    💺 1 seat available
+                </p>
 
-        <div class="card">
-
-            <h2>📋 My Carpool Listing</h2>
-
-            <div id="myListing">
-
-                <div class="empty">
-                    No carpool listing created yet.
-                </div>
+                <button
+                    class="join-btn"
+                    onclick="joinPool(this)">
+                    Join Carpool
+                </button>
 
             </div>
 
@@ -704,282 +404,159 @@
 
     </section>
 
-
-    <!-- CONFIRMED CARPOOL -->
-
-    <div class="card">
-
-        <h2>✅ Confirmed Carpool</h2>
-
-        <div id="confirmed">
-
-            <div class="empty">
-                No confirmed carpool yet.
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- SAFETY NOTE -->
-
-    <div class="card">
-
-        <h2>🛡️ Carpool Safety</h2>
-
-        <p style="margin-top:12px;line-height:1.7;">
-            AutoSetu carpooling is designed for sharing the costs
-            of an already-planned journey. Users should follow
-            applicable transport, insurance and local rules.
-        </p>
-
-        <button
-            class="btn blue"
-            onclick="safetyInfo()">
-
-            Safety Information
-
-        </button>
-
-    </div>
-
 </main>
 
 
 <footer>
 
-    <h2>🚗 AutoSetu</h2>
-
-    <p>Smart Carpool Platform</p>
-
-    <p>© 2026 AutoSetu. All Rights Reserved.</p>
+    <p>
+        © 2026 AutoSetu | Smart Carpool Service
+    </p>
 
 </footer>
 
 
-<div id="toast" class="toast"></div>
-
-
 <script>
 
-function showToast(message) {
+function createPool(event){
 
-    const toast =
-        document.getElementById("toast");
+    event.preventDefault();
 
-    toast.innerText = message;
-
-    toast.style.display = "block";
-
-    setTimeout(function() {
-
-        toast.style.display = "none";
-
-    }, 3000);
-}
-
-
-function showSearch() {
-
-    document
-        .getElementById("searchSection")
-        .classList.remove("hidden");
-
-    document
-        .getElementById("createSection")
-        .classList.add("hidden");
-
-    document
-        .getElementById("searchTab")
-        .classList.add("active");
-
-    document
-        .getElementById("createTab")
-        .classList.remove("active");
-}
-
-
-function showCreate() {
-
-    document
-        .getElementById("searchSection")
-        .classList.add("hidden");
-
-    document
-        .getElementById("createSection")
-        .classList.remove("hidden");
-
-    document
-        .getElementById("createTab")
-        .classList.add("active");
-
-    document
-        .getElementById("searchTab")
-        .classList.remove("active");
-}
-
-
-function searchCarpool() {
-
-    const from =
-        document.getElementById("searchFrom").value.trim();
-
-    const to =
-        document.getElementById("searchTo").value.trim();
-
-    if (!from || !to) {
-
-        showToast(
-            "Please enter starting location and destination."
-        );
-
-        return;
-    }
-
-    document.getElementById("aiResult").innerHTML = `
-
-        <div class="carpool-item">
-
-            <h3>🧠 Best AI Match Found</h3>
-
-            <p style="margin-top:10px;">
-                Route:
-                <b>${from}</b>
-                →
-                <b>${to}</b>
-            </p>
-
-            <p class="match" style="margin-top:8px;">
-                🤖 96% Route Compatibility
-            </p>
-
-            <p style="margin-top:8px;">
-                Aman Kumar is the closest matching carpool.
-            </p>
-
-        </div>
-    `;
-
-    showToast(
-        "AI matching completed ✓"
-    );
-}
-
-
-function requestSeat(driver) {
-
-    const answer =
-        confirm(
-            "Request a seat from " +
-            driver +
-            "?"
-        );
-
-    if (answer) {
-
-        document.getElementById("confirmed").innerHTML = `
-
-            <div class="carpool-item">
-
-                <h3>🚗 Carpool Request Sent</h3>
-
-                <p style="margin-top:10px;">
-                    Driver:
-                    <b>${driver}</b>
-                </p>
-
-                <p>
-                    Status:
-                    <span class="badge match">
-                        REQUESTED
-                    </span>
-                </p>
-
-                <button
-                    class="btn red"
-                    onclick="cancelRequest()">
-
-                    Cancel Request
-
-                </button>
-
-            </div>
-        `;
-
-        showToast(
-            "Seat request sent ✓"
-        );
-    }
-}
-
-
-function cancelRequest() {
-
-    document.getElementById("confirmed").innerHTML = `
-
-        <div class="empty">
-            Carpool request cancelled.
-        </div>
-    `;
-
-    showToast(
-        "Request cancelled."
-    );
-}
-
-
-function createCarpool() {
-
-    const from =
-        document.getElementById("createFrom").value.trim();
-
-    const to =
-        document.getElementById("createTo").value.trim();
-
-    const date =
-        document.getElementById("createDate").value;
-
-    const time =
-        document.getElementById("createTime").value;
-
-    const seats =
-        document.getElementById("seats").value;
+    const name =
+        document.getElementById("name").value.trim();
 
     const vehicle =
         document.getElementById("vehicle").value;
 
-    const cost =
-        document.getElementById("cost").value;
+    const from =
+        document.getElementById("from").value.trim();
 
-    if (
-        !from ||
-        !to ||
-        !date ||
-        !time ||
-        !seats ||
-        !vehicle ||
-        !cost
-    ) {
+    const to =
+        document.getElementById("to").value.trim();
 
-        showToast(
-            "Please fill all carpool details."
-        );
+    const date =
+        document.getElementById("date").value;
 
-        return;
-    }
+    const seats =
+        document.getElementById("seats").value;
 
-    document.getElementById("myListing").innerHTML = `
 
-        <div class="carpool-item">
+    const pool = {
+        name:name,
+        vehicle:vehicle,
+        from:from,
+        to:to,
+        date:date,
+        seats:seats
+    };
 
-            <h3>🚗 Your Carpool</h3>
 
-            <div class="route">
+    let carpools =
+        JSON.parse(
+            localStorage.getItem("carpools")
+        ) || [];
 
-                📍 <b>${from}</b>
-                → 📌 <b>${to}</b>
 
-                <br>
+    carpools.push(pool);
 
- 
+
+    localStorage.setItem(
+        "carpools",
+        JSON.stringify(carpools)
+    );
+
+
+    displayPools();
+
+
+    document.querySelector("form").reset();
+
+
+    document.getElementById("message").innerText =
+        "✅ Carpool created successfully!";
+
+}
+
+
+function displayPools(){
+
+    const list =
+        document.getElementById("poolList");
+
+    let carpools =
+        JSON.parse(
+            localStorage.getItem("carpools")
+        ) || [];
+
+
+    carpools.forEach(function(pool){
+
+        const card =
+            document.createElement("div");
+
+        card.className = "pool-card";
+
+
+        card.innerHTML = `
+
+            <h3>
+                ${pool.vehicle === "Car" ? "🚗" : "🏍️"}
+                ${pool.name}
+            </h3>
+
+            <p>
+                📍 ${pool.from} → ${pool.to}
+            </p>
+
+            <p>
+                📅 ${pool.date}
+            </p>
+
+            <p>
+                💺 ${pool.seats} seats available
+            </p>
+
+            <button
+                class="join-btn"
+                onclick="joinPool(this)">
+                Join Carpool
+            </button>
+
+        `;
+
+
+        list.appendChild(card);
+
+    });
+
+}
+
+
+function joinPool(button){
+
+    button.innerText = "✅ Joined";
+
+    button.disabled = true;
+
+    button.style.background = "#6c757d";
+
+    alert(
+        "You have successfully joined the carpool!"
+    );
+
+}
+
+
+function goHome(){
+
+    window.location.href = "index.html";
+
+}
+
+
+window.onload = displayPools;
+
+</script>
+
+</body>
+</html>
