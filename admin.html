@@ -1,4 +1,4 @@
-CTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,122 +7,111 @@ CTYPE html>
 
 <style>
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial, sans-serif;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
 body{
-    background:#f5f7fb;
-    color:#172033;
+    background:#f4f6fa;
+    color:#243b64;
 }
 
-.header{
-    background:#ffffff;
-    padding:16px 5%;
+.navbar{
+    background:white;
+    padding:15px 5%;
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    box-shadow:0 2px 12px rgba(0,0,0,.08);
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
 
 .logo{
-    font-size:25px;
+    font-size:28px;
     font-weight:bold;
-    margin-right:auto;
 }
 
 .logo span{
-    color:#ff7200;
+    color:#f59e0b;
 }
 
-.back{
-    text-decoration:none;
-    color:#172033;
-    margin-right:15px;
+.nav-buttons{
+    display:flex;
+    gap:8px;
 }
 
-.btn{
+.nav-buttons button{
     border:0;
-    padding:11px 18px;
-    border-radius:9px;
+    padding:9px 14px;
+    border-radius:7px;
     cursor:pointer;
-    font-weight:bold;
-}
-
-.orange{
-    background:#ff7200;
+    background:#243b64;
     color:white;
 }
 
-.red{
-    background:#d92d20;
-    color:white;
-}
-
-.green{
-    background:#12a150;
-    color:white;
+.logout{
+    background:#dc3545 !important;
 }
 
 .container{
+    width:92%;
     max-width:1200px;
-    margin:auto;
-    padding:35px 5%;
+    margin:30px auto;
 }
 
-.heading{
+.header{
     margin-bottom:25px;
 }
 
-.heading small{
-    color:#ff7200;
-    font-weight:bold;
+.header h1{
+    font-size:32px;
+    margin-bottom:7px;
 }
 
-.heading h1{
-    margin-top:8px;
+.header p{
+    color:#777;
 }
+
+/* STATS */
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
     margin-bottom:25px;
 }
 
 .stat{
     background:white;
     padding:22px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,.05);
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.07);
 }
 
-.stat strong{
-    display:block;
-    font-size:28px;
-    margin-bottom:7px;
+.stat .icon{
+    font-size:30px;
 }
 
-.stat span{
-    color:#667085;
+.stat h2{
+    margin:8px 0 3px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-    margin-top:20px;
+.stat p{
+    color:#777;
 }
 
-.card{
+/* SECTIONS */
+
+.section{
     background:white;
-    padding:22px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,.05);
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:25px;
+    box-shadow:0 3px 15px rgba(0,0,0,.07);
 }
 
-.card h2{
+.section h2{
     margin-bottom:18px;
 }
 
@@ -132,17 +121,16 @@ table{
 }
 
 th,td{
-    padding:12px 8px;
+    padding:13px 10px;
     border-bottom:1px solid #eee;
     text-align:left;
 }
 
 th{
-    background:#fafafa;
+    background:#f7f8fb;
 }
 
-.badge{
-    display:inline-block;
+.status{
     padding:5px 9px;
     border-radius:20px;
     font-size:12px;
@@ -150,117 +138,111 @@ th{
 }
 
 .verified{
-    background:#e8fff3;
-    color:#078b52;
+    background:#d1e7dd;
+    color:#146c43;
 }
 
 .pending{
-    background:#fff4e5;
-    color:#b54708;
+    background:#fff3cd;
+    color:#856404;
 }
 
-.high{
-    background:#ffe9e7;
-    color:#d92d20;
+.completed{
+    background:#d1e7dd;
+    color:#146c43;
 }
 
-.risk{
+.cancelled{
+    background:#f8d7da;
+    color:#842029;
+}
+
+.action{
+    border:0;
+    padding:7px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    margin:2px;
+}
+
+.approve{
+    background:#198754;
+    color:white;
+}
+
+.reject{
+    background:#dc3545;
+    color:white;
+}
+
+.view{
+    background:#243b64;
+    color:white;
+}
+
+/* REPORT */
+
+.report{
+    border:1px solid #eee;
     padding:15px;
-    border-radius:10px;
-    margin:10px 0;
-}
-
-.low{
-    background:#e8fff3;
-}
-
-.medium{
-    background:#fff4e5;
-}
-
-.high-risk{
-    background:#ffe9e7;
-}
-
-.heatmap{
-    min-height:300px;
-    border-radius:12px;
-    background:
-    linear-gradient(45deg,#e7f1e7 25%,transparent 25%),
-    linear-gradient(-45deg,#e7f1e7 25%,transparent 25%),
-    #eef3ee;
-    background-size:60px 60px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    line-height:2;
-    font-size:18px;
-}
-
-.action-buttons{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-}
-
-.notification{
-    padding:14px;
-    background:#fff7ed;
-    border-left:4px solid #ff7200;
-    margin:10px 0;
     border-radius:8px;
+    margin-bottom:10px;
 }
+
+.report strong{
+    color:#243b64;
+}
+
+.report button{
+    margin-top:10px;
+    padding:7px 12px;
+    border:0;
+    border-radius:6px;
+    background:#dc3545;
+    color:white;
+    cursor:pointer;
+}
+
+/* FOOTER */
 
 footer{
-    background:#111827;
+    background:#243b64;
     color:white;
     text-align:center;
-    padding:35px;
+    padding:25px;
     margin-top:40px;
 }
 
-footer p{
-    color:#c7cbd3;
-    margin-top:8px;
-}
+@media(max-width:700px){
 
-.toast{
-    position:fixed;
-    bottom:25px;
-    right:25px;
-    background:#172033;
-    color:white;
-    padding:15px 20px;
-    border-radius:10px;
-    display:none;
-    z-index:1000;
-}
-
-@media(max-width:800px){
-
-    .stats{
-        grid-template-columns:1fr 1fr;
+    .navbar{
+        padding:12px 15px;
     }
 
-    .grid{
-        grid-template-columns:1fr;
+    .logo{
+        font-size:22px;
     }
 
-    .header{
-        flex-wrap:wrap;
-        gap:12px;
+    .nav-buttons button{
+        padding:7px 9px;
+        font-size:12px;
     }
-}
 
-@media(max-width:500px){
+    .container{
+        width:94%;
+    }
 
-    .stats{
-        grid-template-columns:1fr;
+    .header h1{
+        font-size:26px;
+    }
+
+    .section{
+        padding:15px;
+        overflow-x:auto;
     }
 
     table{
-        font-size:13px;
+        min-width:650px;
     }
 }
 </style>
@@ -268,716 +250,539 @@ footer p{
 
 <body>
 
-<header class="header">
+<!-- NAVBAR -->
+
+<nav class="navbar">
 
     <div class="logo">
-        🛺 Auto<span>Setu</span>
+        Auto<span>Setu</span>
     </div>
 
-    <a href="index.html" class="back">
-        ← Home
-    </a>
+    <div class="nav-buttons">
 
-    <button class="btn red" onclick="logout()">
-        Logout
-    </button>
+        <button onclick="goHome()">
+            🏠 Home
+        </button>
 
-</header>
+        <button class="logout" onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+</nav>
 
 
-<main class="container">
+<div class="container">
 
-    <div class="heading">
+    <!-- HEADER -->
 
-        <small>ADMIN CONTROL CENTER</small>
+    <div class="header">
 
-        <h1>
-            👨‍💼 AutoSetu Admin Dashboard
-        </h1>
+        <h1>⚙️ Admin Dashboard</h1>
 
-        <p style="margin-top:8px;color:#667085">
-            Monitor users, drivers, rides, carpools,
-            reports, verification and system activity.
+        <p>
+            Manage AutoSetu users, drivers, rides and reports.
         </p>
 
     </div>
 
 
-    <!-- MAIN STATISTICS -->
+    <!-- STATISTICS -->
 
     <div class="stats">
 
         <div class="stat">
-            <strong>1,248</strong>
-            <span>👥 Total Users</span>
+
+            <div class="icon">👥</div>
+
+            <h2 id="userCount">128</h2>
+
+            <p>Total Users</p>
+
         </div>
 
-        <div class="stat">
-            <strong>342</strong>
-            <span>🚕 Registered Drivers</span>
-        </div>
 
         <div class="stat">
-            <strong>87</strong>
-            <span>🟢 Online Drivers</span>
+
+            <div class="icon">🚕</div>
+
+            <h2 id="driverCount">42</h2>
+
+            <p>Total Drivers</p>
+
         </div>
 
+
         <div class="stat">
-            <strong>31</strong>
-            <span>🚕 Active Rides</span>
+
+            <div class="icon">🚗</div>
+
+            <h2 id="rideCount">856</h2>
+
+            <p>Total Rides</p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="icon">⏳</div>
+
+            <h2 id="pendingCount">5</h2>
+
+            <p>Pending Verification</p>
+
         </div>
 
     </div>
 
 
-    <div class="stats">
+    <!-- USERS -->
 
-        <div class="stat">
-            <strong>64</strong>
-            <span>🚗 Active Carpools</span>
-        </div>
+    <section class="section">
 
-        <div class="stat">
-            <strong>7</strong>
-            <span>🚨 Open Reports</span>
-        </div>
+        <h2>👥 User Management</h2>
 
-        <div class="stat">
-            <strong class="high">3</strong>
-            <span>🔴 High Risk</span>
-        </div>
+        <table>
 
-        <div class="stat">
-            <strong>98%</strong>
-            <span>⚡ System Health</span>
-        </div>
-
-    </div>
-
-
-    <!-- USER MANAGEMENT -->
-
-    <div class="grid">
-
-        <div class="card">
-
-            <h2>👥 User Management</h2>
-
-            <table>
+            <thead>
 
                 <tr>
-                    <th>User</th>
+                    <th>Name</th>
+                    <th>Email</th>
                     <th>Role</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
 
+            </thead>
+
+            <tbody>
+
                 <tr>
                     <td>Sakina</td>
+                    <td>sakina@test.com</td>
                     <td>Passenger</td>
                     <td>
-                        <span class="badge verified">
+                        <span class="status verified">
                             Active
                         </span>
                     </td>
                     <td>
-                        <button class="btn red"
-                                onclick="manageUser('Sakina')">
-                            Manage
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Aman</td>
-                    <td>Passenger</td>
-                    <td>
-                        <span class="badge verified">
-                            Active
-                        </span>
-                    </td>
-                    <td>
-                        <button class="btn red"
-                                onclick="manageUser('Aman')">
-                            Manage
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Rahul</td>
-                    <td>Passenger</td>
-                    <td>
-                        <span class="badge pending">
-                            Review
-                        </span>
-                    </td>
-                    <td>
-                        <button class="btn orange"
-                                onclick="manageUser('Rahul')">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-            </table>
-
-        </div>
-
-
-        <!-- DRIVER MANAGEMENT -->
-
-        <div class="card">
-
-            <h2>🚕 Driver Management</h2>
-
-            <table>
-
-                <tr>
-                    <th>Driver</th>
-                    <th>Rating</th>
-                    <th>Verification</th>
-                    <th>Action</th>
-                </tr>
-
-                <tr>
-                    <td>Aman Kumar</td>
-                    <td>⭐ 4.8</td>
-                    <td>
-                        <span class="badge verified">
-                            Verified
-                        </span>
-                    </td>
-                    <td>
-                        <button class="btn orange"
-                                onclick="viewDriver()">
+                        <button
+                            class="action view"
+                            onclick="viewUser('Sakina')">
                             View
                         </button>
                     </td>
                 </tr>
+
+
+                <tr>
+                    <td>Aman Singh</td>
+                    <td>driver@test.com</td>
+                    <td>Driver</td>
+                    <td>
+                        <span class="status verified">
+                            Active
+                        </span>
+                    </td>
+                    <td>
+                        <button
+                            class="action view"
+                            onclick="viewUser('Aman Singh')">
+                            View
+                        </button>
+                    </td>
+                </tr>
+
 
                 <tr>
                     <td>Raj Kumar</td>
-                    <td>⭐ 4.7</td>
+                    <td>raj@example.com</td>
+                    <td>Passenger</td>
                     <td>
-                        <span class="badge verified">
-                            Verified
+                        <span class="status verified">
+                            Active
                         </span>
                     </td>
                     <td>
-                        <button class="btn orange"
-                                onclick="viewDriver()">
+                        <button
+                            class="action view"
+                            onclick="viewUser('Raj Kumar')">
                             View
                         </button>
                     </td>
                 </tr>
 
-            </table>
-
-        </div>
-
-    </div>
-
-
-    <!-- VERIFICATION + VEHICLES -->
-
-    <div class="grid">
-
-        <div class="card">
-
-            <h2>🪪 Verification Management</h2>
-
-            <div class="notification">
-
-                <b>Aman Kumar</b>
-
-                <p>
-                    Driving License:
-                    <span class="badge verified">
-                        Verified
-                    </span>
-                </p>
-
-                <p>
-                    Vehicle Document:
-                    <span class="badge verified">
-                        Verified
-                    </span>
-                </p>
-
-                <p>
-                    Insurance:
-                    <span class="badge verified">
-                        Valid
-                    </span>
-                </p>
-
-                <div class="action-buttons">
-
-                    <button class="btn green"
-                            onclick="approveVerification()">
-                        ✓ Approve
-                    </button>
-
-                    <button class="btn orange"
-                            onclick="reviewVerification()">
-                        Review
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="notification">
-
-                <b>Rahul Singh</b>
-
-                <p>
-                    Driving License:
-                    <span class="badge pending">
-                        Pending
-                    </span>
-                </p>
-
-                <div class="action-buttons">
-
-                    <button class="btn green"
-                            onclick="approveVerification()">
-                        ✓ Verify
-                    </button>
-
-                    <button class="btn red"
-                            onclick="rejectVerification()">
-                        Reject
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <h2>🚗 Vehicle Management</h2>
-
-            <table>
-
-                <tr>
-                    <th>Vehicle</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                </tr>
-
-                <tr>
-                    <td>PB-07-AB-1234</td>
-                    <td>Auto</td>
-                    <td>
-                        <span class="badge verified">
-                            Verified
-                        </span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>PB-07-CD-5678</td>
-                    <td>Cab</td>
-                    <td>
-                        <span class="badge verified">
-                            Verified
-                        </span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>PB-07-EF-9012</td>
-                    <td>Taxi</td>
-                    <td>
-                        <span class="badge pending">
-                            Pending
-                        </span>
-                    </td>
-                </tr>
-
-            </table>
-
-        </div>
-
-    </div>
-
-
-    <!-- RIDE MONITORING -->
-
-    <div class="card" style="margin-top:20px">
-
-        <h2>🚕 Live Ride Monitoring</h2>
-
-        <table>
-
-            <tr>
-                <th>Ride ID</th>
-                <th>Passenger</th>
-                <th>Driver</th>
-                <th>Route</th>
-                <th>Status</th>
-            </tr>
-
-            <tr>
-                <td>AS-10021</td>
-                <td>Sakina</td>
-                <td>Aman</td>
-                <td>University → Bus Stand</td>
-                <td>
-                    <span class="badge verified">
-                        STARTED
-                    </span>
-                </td>
-            </tr>
-
-            <tr>
-                <td>AS-10022</td>
-                <td>Rahul</td>
-                <td>Raj</td>
-                <td>Market → Railway Station</td>
-                <td>
-                    <span class="badge pending">
-                        DRIVER ON WAY
-                    </span>
-                </td>
-            </tr>
+            </tbody>
 
         </table>
 
-    </div>
+    </section>
+
+
+    <!-- DRIVER VERIFICATION -->
+
+    <section class="section">
+
+        <h2>🚕 Driver Verification</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Driver</th>
+                    <th>Vehicle</th>
+                    <th>License</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="driverTable">
+
+                <tr>
+
+                    <td>Aman Singh</td>
+
+                    <td>Auto Rickshaw</td>
+
+                    <td>PB-07-AB-1234</td>
+
+                    <td>
+                        <span class="status pending">
+                            Pending
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="action approve"
+                            onclick="approveDriver(this)">
+                            ✓ Approve
+                        </button>
+
+                        <button
+                            class="action reject"
+                            onclick="rejectDriver(this)">
+                            ✕ Reject
+                        </button>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>Raj Kumar</td>
+
+                    <td>Auto Rickshaw</td>
+
+                    <td>PB-08-CD-5678</td>
+
+                    <td>
+                        <span class="status verified">
+                            Verified
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="action view"
+                            onclick="viewUser('Raj Kumar')">
+                            View
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    <!-- RIDES -->
+
+    <section class="section">
+
+        <h2>🚗 Ride Management</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Ride ID</th>
+                    <th>Passenger</th>
+                    <th>Driver</th>
+                    <th>Route</th>
+                    <th>Fare</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>AS-10021</td>
+
+                    <td>Sakina</td>
+
+                    <td>Aman Singh</td>
+
+                    <td>
+                        Phagwara → Mahilpur
+                    </td>
+
+                    <td>₹80</td>
+
+                    <td>
+                        <span class="status completed">
+                            Completed
+                        </span>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>AS-10022</td>
+
+                    <td>Priya</td>
+
+                    <td>Raj Kumar</td>
+
+                    <td>
+                        Mahilpur → Hoshiarpur
+                    </td>
+
+                    <td>₹120</td>
+
+                    <td>
+                        <span class="status completed">
+                            Completed
+                        </span>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>AS-10023</td>
+
+                    <td>Rahul</td>
+
+                    <td>Not Assigned</td>
+
+                    <td>
+                        Garhshankar → Hoshiarpur
+                    </td>
+
+                    <td>₹150</td>
+
+                    <td>
+                        <span class="status pending">
+                            Searching
+                        </span>
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
 
 
     <!-- REPORTS -->
 
-    <div class="grid">
+    <section class="section">
 
-        <div class="card">
+        <h2>🚨 Reports & Complaints</h2>
 
-            <h2>🚨 Reports & Complaints</h2>
 
-            <div class="notification">
+        <div class="report">
 
-                <b>Report #1021</b>
+            <strong>Complaint #R001</strong>
 
-                <p>
-                    Category: Dangerous Driving
-                </p>
+            <p>
+                Passenger reported a delay in pickup.
+            </p>
 
-                <p>
-                    Status:
-                    <span class="badge pending">
-                        OPEN
-                    </span>
-                </p>
-
-                <button class="btn orange"
-                        onclick="reviewReport(1021)">
-                    Review Report
-                </button>
-
-            </div>
-
-
-            <div class="notification">
-
-                <b>Report #1022</b>
-
-                <p>
-                    Category: Suspicious Behaviour
-                </p>
-
-                <p>
-                    Status:
-                    <span class="badge pending">
-                        OPEN
-                    </span>
-                </p>
-
-                <button class="btn orange"
-                        onclick="reviewReport(1022)">
-                    Review Report
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- RISK ENGINE -->
-
-        <div class="card">
-
-            <h2>🛡️ AutoSetu Risk Engine</h2>
-
-            <div class="risk low">
-
-                🟢 <b>LOW RISK</b>
-
-                <p>
-                    Normal account activity.
-                </p>
-
-            </div>
-
-            <div class="risk medium">
-
-                🟡 <b>MEDIUM RISK</b>
-
-                <p>
-                    Multiple cancellations detected.
-                </p>
-
-            </div>
-
-            <div class="risk high-risk">
-
-                🔴 <b>HIGH RISK</b>
-
-                <p>
-                    Repeated reports require admin review.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ANALYTICS -->
-
-    <div class="card" style="margin-top:20px">
-
-        <h2>📊 Analytics</h2>
-
-        <div class="stats">
-
-            <div class="stat">
-                <strong>520</strong>
-                <span>Daily Rides</span>
-            </div>
-
-            <div class="stat">
-                <strong>1,840</strong>
-                <span>Active Users</span>
-            </div>
-
-            <div class="stat">
-                <strong>78%</strong>
-                <span>Driver Utilization</span>
-            </div>
-
-            <div class="stat">
-                <strong>64</strong>
-                <span>Carpool Trips</span>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- DEMAND HEATMAP -->
-
-    <div class="card" style="margin-top:20px">
-
-        <h2>🗺️ Location / Demand Heatmap</h2>
-
-        <div class="heatmap">
-
-            <div>
-
-                🔴 <b>Railway Station</b>
-                — HIGH DEMAND<br>
-
-                🟡 <b>Market</b>
-                — MEDIUM DEMAND<br>
-
-                🔴 <b>Bus Stand</b>
-                — HIGH DEMAND<br>
-
-                🟢 <b>University</b>
-                — LOW DEMAND
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ADMIN ACTIONS -->
-
-    <div class="card" style="margin-top:20px">
-
-        <h2>⚙️ Administrative Actions</h2>
-
-        <div class="action-buttons">
-
-            <button class="btn orange"
-                    onclick="toast('User management opened')">
-                👥 Manage Users
-            </button>
-
-            <button class="btn orange"
-                    onclick="toast('Driver management opened')">
-                🚕 Manage Drivers
-            </button>
-
-            <button class="btn orange"
-                    onclick="toast('Ride monitoring opened')">
-                🚕 Monitor Rides
-            </button>
-
-            <button class="btn orange"
-                    onclick="toast('Carpool monitoring opened')">
-                🚗 Monitor Carpools
-            </button>
-
-            <button class="btn red"
-                    onclick="suspendAccount()">
-                🚫 Suspend Account
-            </button>
-
-            <button class="btn green"
-                    onclick="restoreAccount()">
-                ✓ Restore Account
+            <button onclick="resolveReport(this)">
+                Resolve
             </button>
 
         </div>
 
-    </div>
 
-</main>
+        <div class="report">
+
+            <strong>Complaint #R002</strong>
+
+            <p>
+                Driver document verification required.
+            </p>
+
+            <button onclick="resolveReport(this)">
+                Resolve
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
 
 
 <footer>
 
-    <h2>🛺 AutoSetu</h2>
-
     <p>
-        Admin Control Center · Smart Mobility Platform
-    </p>
-
-    <p>
-        © 2026 AutoSetu. All Rights Reserved.
+        © 2026 AutoSetu | Admin Panel
     </p>
 
 </footer>
 
 
-<div class="toast" id="toast"></div>
-
-
 <script>
 
-function toast(message){
+/* HOME */
 
-    const box =
-        document.getElementById("toast");
+function goHome(){
 
-    box.textContent = message;
+    window.location.href =
+        "index.html";
 
-    box.style.display = "block";
-
-    setTimeout(function(){
-
-        box.style.display = "none";
-
-    },3000);
 }
 
 
-function manageUser(name){
-
-    toast(
-        "Managing user: " + name
-    );
-}
-
-
-function viewDriver(){
-
-    toast(
-        "Driver profile opened ✓"
-    );
-}
-
-
-function approveVerification(){
-
-    toast(
-        "Verification approved ✓"
-    );
-}
-
-
-function reviewVerification(){
-
-    toast(
-        "Verification sent for admin review"
-    );
-}
-
-
-function rejectVerification(){
-
-    toast(
-        "Verification rejected"
-    );
-}
-
-
-function reviewReport(id){
-
-    toast(
-        "Report #" + id + " opened"
-    );
-}
-
-
-function suspendAccount(){
-
-    const answer =
-        confirm(
-            "Suspend selected account?"
-        );
-
-    if(answer){
-
-        toast(
-            "Account suspended ✓"
-        );
-    }
-}
-
-
-function restoreAccount(){
-
-    toast(
-        "Account restored ✓"
-    );
-}
-
+/* LOGOUT */
 
 function logout(){
 
-    const answer =
-        confirm(
-            "Logout from Admin?"
-        );
+    localStorage.removeItem("autosetuEmail");
 
-    if(answer){
+    localStorage.removeItem("autosetuRole");
 
-        window.location.href =
-            "index.html";
-    }
+    alert("Logged out successfully!");
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* VIEW USER */
+
+function viewUser(name){
+
+    alert(
+        "User Profile: " + name
+    );
+
+}
+
+
+/* APPROVE DRIVER */
+
+function approveDriver(button){
+
+    const row =
+        button.closest("tr");
+
+    const status =
+        row.querySelector(".status");
+
+    status.innerText =
+        "Verified";
+
+    status.className =
+        "status verified";
+
+    button.parentElement
+        .querySelector(".reject")
+        ?.remove();
+
+    button.remove();
+
+    updatePending();
+
+    alert(
+        "Driver approved successfully!"
+    );
+
+}
+
+
+/* REJECT DRIVER */
+
+function rejectDriver(button){
+
+    const row =
+        button.closest("tr");
+
+    row.remove();
+
+    updatePending();
+
+    alert(
+        "Driver verification rejected."
+    );
+
+}
+
+
+/* UPDATE PENDING COUNT */
+
+function updatePending(){
+
+    const pending =
+        document.querySelectorAll(
+            ".status.pending"
+        ).length;
+
+    document.getElementById(
+        "pendingCount"
+    ).innerText = pending;
+
+}
+
+
+/* RESOLVE REPORT */
+
+function resolveReport(button){
+
+    const report =
+        button.closest(".report");
+
+    report.style.opacity =
+        "0.5";
+
+    button.innerText =
+        "✓ Resolved";
+
+    button.disabled =
+        true;
+
+    alert(
+        "Report resolved successfully!"
+    );
+
 }
 
 </script>
